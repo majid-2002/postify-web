@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main {
+  font-family: Arial, Helvetica, sans-serif;
+  
+  .header-area {
+    height: 15vh;
+    width: 20vw;
+    background-color: #171718;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+      color: #fafafa;
+      font-size: 2.5rem;
+    }
+  }
+  
+  .request-area {
+    width: 80vw;
+    height: 50vh;
+    background-color: #212224;
+    float: right;
+  }
+
+  .response-area {
+    width: 80vw;
+    height: 50vh;
+    background-color: #212224;
+    float: right;
+  }
+
+  .history {
+    height: 85vh;
+    width: 20vw;
+    background-color: #171718;
+    float: left;
+    padding: 2em;
+    h3 {
+      color: #fafafa;
+      font-family: inherit;
+    }
+  }
+}
