@@ -1,3 +1,7 @@
+@import "/node_modules/tailwindcss/base.css";
+@import "/node_modules/tailwindcss/components.css";
+@import "/node_modules/tailwindcss/utilities.css";
+
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +10,7 @@
 
 .main {
   font-family: Arial, Helvetica, sans-serif;
-  
+
   .header-area {
     height: 15vh;
     width: 20vw;
@@ -21,12 +25,14 @@
       font-size: 2.5rem;
     }
   }
-  
+
   .request-area {
     width: 80vw;
     height: 50vh;
     background-color: #212224;
     float: right;
+    padding: 3.5em 3em;
+    
   }
 
   .response-area {
