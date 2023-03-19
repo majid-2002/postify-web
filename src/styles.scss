@@ -1,6 +1,7 @@
 @import "/node_modules/tailwindcss/base.css";
 @import "/node_modules/tailwindcss/components.css";
 @import "/node_modules/tailwindcss/utilities.css";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 
 * {
   margin: 0;
@@ -9,11 +10,13 @@
 }
 
 .main {
-  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Poppins', sans-serif;
 
   .header-area {
-    height: 15vh;
-    width: 20vw;
+    height: 15%;
+    width: 20%;
     background-color: #171718;
     float: left;
     display: flex;
@@ -27,24 +30,49 @@
   }
 
   .request-area {
-    width: 80vw;
-    height: 50vh;
+    height: 15%;
+    width: 80%;
     background-color: #212224;
     float: right;
-    padding: 3.5em 3em;
-    
+    padding: 3em 3em;
+  }
+  .request-input-area{
+    padding: 2em 3em;
+    color: #fafafa;
+    width: 80%;
+    height: 35%;
+    float: right;
+    background-color: #212224;
+    ul{
+      padding: 0;
+      li{
+        font-weight: 500;
+        list-style: none;
+        font-size: 1.2rem;
+        color: #fafafa7b;
+        display: inline;
+        margin-inline: 1.9em;
+  
+        &:hover{
+          color: #fafafa;
+          transition: 0.2s;
+        }
+      }
+    }
+
   }
 
   .response-area {
-    width: 80vw;
-    height: 50vh;
+    width: 80%;
+    height: 50%;
     background-color: #212224;
     float: right;
   }
 
+
   .history {
-    height: 85vh;
-    width: 20vw;
+    height: 85%;
+    width: 20%;
     background-color: #171718;
     float: left;
     padding: 2em;
