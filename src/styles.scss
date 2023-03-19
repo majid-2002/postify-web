@@ -113,6 +113,11 @@ body{
         color: #fafafa;
         resize: none;
         font-family: monospace;
+
+        &::placeholder{
+          font-family: 'Poppins', sans-serif;
+          font-weight: 500;
+        }
       }
     }
 
@@ -132,6 +137,7 @@ body{
     width: 20%;
     background-color: #171718;
     float: left;
+    display: flow-root;
     padding: 2em;
     h3 {
       color: #fafafa;

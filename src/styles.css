@@ -103,6 +103,14 @@ body ::-webkit-scrollbar-thumb {
   resize: none;
   font-family: monospace;
 }
+.main .request-input-area .parameter-area .body-input-field::-moz-placeholder {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+.main .request-input-area .parameter-area .body-input-field::placeholder {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
 .main .response-area {
   width: 80%;
   height: 50%;
@@ -115,6 +123,7 @@ body ::-webkit-scrollbar-thumb {
   width: 20%;
   background-color: #171718;
   float: left;
+  display: flow-root;
   padding: 2em;
 }
 .main .history h3 {

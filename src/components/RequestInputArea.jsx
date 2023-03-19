@@ -53,7 +53,7 @@ function Body() {
         <Form.Control
           as="textarea"
           className="bg-dark body-input-field"
-          placeholder="Leave a comment here"
+          placeholder="Raw Request Body"
         />
       </Col>
     );
@@ -94,7 +94,6 @@ function Headers() {
   return (
     <div className="px-4 parameter-area">
       <p>Header List</p>
-
       <Row className="g-2">
         <Col md={5}>
           <Form.Control
