@@ -1,44 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col, Form, Dropdown } from "react-bootstrap";
 import FeatherIcon from "feather-icons-react";
 
-function Json() {
-  return (
-    <Col md={12}>
-      <Form.Control type="text" className="bg-dark" placeholder="Raw request body" style={{height: "5em"}} />
-    </Col>
-  );
-}
+function RequestInputArea() {
+  const [showComponentItem, setshowComponentItem] = useState("parameter");
 
-function Parameters() {
   return (
-    <div className="px-4 parameter-area">
-      <p>Query parameter</p>
-      <Row className="g-2">
-        <Col md={5}>
-          <Form.Control
-            type="text"
-            placeholder="Parameter 1"
-            className="bg-dark"
-          />
-        </Col>
-        <Col md={5}>
-          <Form.Control type="text" placeholder="Value 1" className="bg-dark" />
-        </Col>
-        <Col md={2}>
-          <FeatherIcon
-            icon="plus-circle"
-            size="2.3em"
-            className="request-icons"
-          />
-          <FeatherIcon icon="delete" size="2.3em" className="request-icons" />
-        </Col>
-      </Row>
+    <div className="request-input-area">
+      <ul>
+        <li onClick={()=>{setshowComponentItem("parameter")}}>Parameters</li>
+        <li onClick={()=>{setshowComponentItem("body")}}>Body</li>
+        <li onClick={()=>{setshowComponentItem("header")}}>Header</li>
+      </ul>
+      {showComponentItem === "parameter"? <Parameters /> : (showComponentItem === "body" ? <Body /> : <Headers />) }
     </div>
   );
 }
 
+function Parameters() {
+    return (
+      <div className="px-4 parameter-area">
+        <p>Query Parameters</p>
+  
+        <Row className="g-2">
+          <Col md={5}>
+            <Form.Control
+              type="text"
+              placeholder="Parameter 1"
+              className="bg-dark text-white"
+            />
+          </Col>
+          <Col md={5}>
+            <Form.Control type="text" placeholder="Value 1" className="bg-dark text-white" />
+          </Col>
+          <Col md={2}>
+            <FeatherIcon
+              icon="plus-circle"
+              size="2.3em"
+              className="request-icons"
+            />
+            <FeatherIcon icon="delete" size="2.3em" className="request-icons" />
+          </Col>
+        </Row>
+      </div>
+    );
+  }
+
 function Body() {
+  function Json() {
+    return (
+      <Col md={12}>
+        <Form.Control
+          as="textarea"
+          className="bg-dark body-input-field"
+          placeholder="Leave a comment here"
+        />
+      </Col>
+    );
+  }
+
   return (
     <div className="px-4 parameter-area">
       <Row className="">
@@ -48,7 +68,7 @@ function Body() {
         <Col md={1}>
           <Dropdown>
             <Dropdown.Toggle variant="plain" className="custom-dropdown-toggle">
-              Dropdown
+              JSON
             </Dropdown.Toggle>
             <Dropdown.Menu variant="dark">
               <Dropdown.Header>Items</Dropdown.Header>
@@ -73,18 +93,18 @@ function Body() {
 function Headers() {
   return (
     <div className="px-4 parameter-area">
-      <p>Query parameter</p>
+      <p>Header List</p>
 
       <Row className="g-2">
         <Col md={5}>
           <Form.Control
             type="text"
             placeholder="Parameter 1"
-            className="bg-dark"
+            className="bg-dark text-white"
           />
         </Col>
         <Col md={5}>
-          <Form.Control type="text" placeholder="Value 1" className="bg-dark" />
+          <Form.Control type="text" placeholder="Value 1" className="bg-dark text-white" />
         </Col>
         <Col md={2}>
           <FeatherIcon
@@ -95,19 +115,6 @@ function Headers() {
           <FeatherIcon icon="delete" size="2.3em" className="request-icons" />
         </Col>
       </Row>
-    </div>
-  );
-}
-
-function RequestInputArea() {
-  return (
-    <div className="request-input-area">
-      <ul>
-        <li>Parameters</li>
-        <li>Body</li>
-        <li>Header</li>
-      </ul>
-      <Body />
     </div>
   );
 }

@@ -8,6 +8,19 @@
   box-sizing: border-box;
 }
 
+body {
+  /* Customize the scrollbar */
+}
+body ::-webkit-scrollbar {
+  width: 8px;
+}
+body ::-webkit-scrollbar-track {
+  background-color: #212224;
+}
+body ::-webkit-scrollbar-thumb {
+  background-color: #555;
+}
+
 .main {
   height: 100vh;
   width: 100vw;
@@ -23,7 +36,7 @@
   justify-content: center;
 }
 .main .header-area h1 {
-  color: #fafafa;
+  color: #0d6efd;
   font-size: 2.5rem;
 }
 .main .request-area {
@@ -31,11 +44,14 @@
   width: 80%;
   background-color: #212224;
   float: right;
-  padding: 3em 3em;
+  padding: 3.5em 3em;
 }
 .main .request-input-area {
   padding: 2em 3em;
   color: #fafafa;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   width: 80%;
   height: 35%;
   float: right;
@@ -77,6 +93,15 @@
 .main .request-input-area .parameter-area .request-icons {
   color: #0d6efd;
   margin-inline: 0.4em;
+  cursor: pointer;
+}
+.main .request-input-area .parameter-area .body-input-field {
+  height: 15em;
+  border: none;
+  height: 14em;
+  color: #fafafa;
+  resize: none;
+  font-family: monospace;
 }
 .main .response-area {
   width: 80%;
@@ -86,6 +111,7 @@
 }
 .main .history {
   height: 85%;
+  overflow-y: scroll;
   width: 20%;
   background-color: #171718;
   float: left;
@@ -94,4 +120,29 @@
 .main .history h3 {
   color: #fafafa;
   font-family: inherit;
+}
+.main .history .history-card {
+  display: flex;
+  justify-content: center;
+  background-color: #212224;
+  margin: 2em 0;
+}
+.main .history .history-card h3 {
+  font-size: 1.4em;
+  display: flex;
+  margin-top: 1.5em;
+  color: green;
+  text-align: center;
+}
+.main .history .history-card span:nth-child(1) {
+  -webkit-margin-end: 0.4em;
+          margin-inline-end: 0.4em;
+}
+.main .history .history-card p:first-child {
+  color: #fafafa;
+  margin-top: 1em;
+}
+.main .history .history-card p:nth-child(2) {
+  color: #838383;
+  word-spacing: 0.2em;
 }/*# sourceMappingURL=styles.css.map */
