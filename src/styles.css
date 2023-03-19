@@ -1,5 +1,97 @@
-@import '/node_modules/tailwindcss/base.css';
-@import '/node_modules/tailwindcss/components.css';
-@import '/node_modules/tailwindcss/utilities.css';
+@import "/node_modules/tailwindcss/base.css";
+@import "/node_modules/tailwindcss/components.css";
+@import "/node_modules/tailwindcss/utilities.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/*# sourceMappingURL=styles.css.map */
+.main {
+  height: 100vh;
+  width: 100vw;
+  font-family: "Poppins", sans-serif;
+}
+.main .header-area {
+  height: 15%;
+  width: 20%;
+  background-color: #171718;
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.main .header-area h1 {
+  color: #fafafa;
+  font-size: 2.5rem;
+}
+.main .request-area {
+  height: 15%;
+  width: 80%;
+  background-color: #212224;
+  float: right;
+  padding: 3em 3em;
+}
+.main .request-input-area {
+  padding: 2em 3em;
+  color: #fafafa;
+  width: 80%;
+  height: 35%;
+  float: right;
+  background-color: #212224;
+}
+.main .request-input-area ul {
+  padding: 0;
+}
+.main .request-input-area ul li {
+  font-weight: 500;
+  list-style: none;
+  font-size: 1.1rem;
+  color: rgba(250, 250, 250, 0.4823529412);
+  display: inline;
+  margin-inline: 1.4em;
+  cursor: pointer;
+}
+.main .request-input-area ul li:hover {
+  color: #fafafa;
+  transition: 0.2s;
+}
+.main .request-input-area .parameter-area p {
+  color: rgba(250, 250, 250, 0.3529411765);
+  font-size: 0.9em;
+  font-weight: 500;
+}
+.main .request-input-area .parameter-area .custom-dropdown-toggle {
+  background-color: none;
+  color: rgba(250, 250, 250, 0.4823529412);
+  padding: 0;
+  border: none;
+  font-weight: 500;
+  box-shadow: none !important;
+}
+.main .request-input-area .parameter-area .custom-dropdown-toggle:hover {
+  background-color: transparent;
+  color: #fafafa;
+}
+.main .request-input-area .parameter-area .request-icons {
+  color: #0d6efd;
+  margin-inline: 0.4em;
+}
+.main .response-area {
+  width: 80%;
+  height: 50%;
+  background-color: #212224;
+  float: right;
+}
+.main .history {
+  height: 85%;
+  width: 20%;
+  background-color: #171718;
+  float: left;
+  padding: 2em;
+}
+.main .history h3 {
+  color: #fafafa;
+  font-family: inherit;
+}/*# sourceMappingURL=styles.css.map */

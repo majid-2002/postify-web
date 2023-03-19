@@ -5,27 +5,29 @@ import Form from "react-bootstrap/Form";
 function RequestArea() {
   return (
     <div className="request-area">
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center px-4">
         <Dropdown>
           <Dropdown.Toggle
             variant="primary"
-            style={{ borderRadius: "6px 0 0 6px" , paddingInline : "3.6em"}}
+            style={{ borderRadius: "6px 0 0 6px", paddingInline: "3.6em" }}
           >
             GET
           </Dropdown.Toggle>
           <Dropdown.Menu variant="dark">
-            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            <Dropdown.Item>GET</Dropdown.Item>
+            <Dropdown.Item>POST</Dropdown.Item>
+            <Dropdown.Item>PUT</Dropdown.Item>
+            <Dropdown.Item>PATCH</Dropdown.Item>
+            <Dropdown.Item>DELETE</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
         <Form.Control
           placeholder="Enter request URL"
           type="text"
-          className="bg-dark w-75"
+          className="bg-dark"
           style={{
-            paddingInline: "2em",
-            marginRight: "1em",
+            paddingInline: "1em",
+            marginRight: "1.6em",
             borderRadius: "0 6px 6px 0",
             outline: "none",
             color: "#fafafa",
