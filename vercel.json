@@ -3,12 +3,6 @@
       "env": {
         "NPM_FLAGS": "--legacy-peer-deps"
       }
-    },
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/index.html"
-      }
-    ]
+    }
   }
   
