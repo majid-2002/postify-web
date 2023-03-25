@@ -1,10 +1,11 @@
-import React from 'react'
+import React from "react";
 
-function ResponseArea() {
+
+export default function App() {
+  
   return (
     <div className="response-area">
+     
     </div>
-  )
+  );
 }
-
-export default ResponseArea

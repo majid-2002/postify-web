@@ -53,6 +53,9 @@ body{
     float: right;
     padding: 3.5em 3em;
   }
+
+
+  //? REQUEST INPUT AREA
   .request-input-area{
     padding: 2em 3em;
     color: #fafafa;
@@ -104,33 +107,24 @@ body{
         margin-inline: 0.4em;
         cursor: pointer;
       }
-
-
-      .body-input-field{
-        height: 15em;
-        border: none;
-        height: 14em;
-        color: #fafafa;
-        resize: none;
-        font-family: monospace;
-
-        &::placeholder{
-          font-family: 'Poppins', sans-serif;
-          font-weight: 500;
-        }
-      }
     }
+
 
   }
 
+
+  //? RESPONSE
   .response-area {
     width: 80%;
     height: 50%;
     background-color: #212224;
     float: right;
+    color: white;
   }
 
 
+
+  //? HISTORY
   .history {
     height: 85%;
     overflow-y: scroll;

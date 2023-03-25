@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Row, Col, Form, Dropdown } from "react-bootstrap";
 import FeatherIcon from "feather-icons-react";
+import CodeMirror from "@uiw/react-codemirror";
+import { json } from "@codemirror/lang-json";
+
 
 function RequestInputArea() {
   const [showComponentItem, setshowComponentItem] = useState("parameter");
@@ -8,53 +11,90 @@ function RequestInputArea() {
   return (
     <div className="request-input-area">
       <ul>
-        <li onClick={()=>{setshowComponentItem("parameter")}}>Parameters</li>
-        <li onClick={()=>{setshowComponentItem("body")}}>Body</li>
-        <li onClick={()=>{setshowComponentItem("header")}}>Header</li>
+        <li
+          onClick={() => {
+            setshowComponentItem("parameter");
+          }}
+        >
+          Parameters
+        </li>
+        <li
+          onClick={() => {
+            setshowComponentItem("body");
+          }}
+        >
+          Body
+        </li>
+        <li
+          onClick={() => {
+            setshowComponentItem("header");
+          }}
+        >
+          Header
+        </li>
       </ul>
-      {showComponentItem === "parameter"? <Parameters /> : (showComponentItem === "body" ? <Body /> : <Headers />) }
+      {showComponentItem === "parameter" ? (
+        <Parameters />
+      ) : showComponentItem === "body" ? (
+        <Body />
+      ) : (
+        <Headers />
+      )}
     </div>
   );
 }
 
 function Parameters() {
-    return (
-      <div className="px-4 parameter-area">
-        <p>Query Parameters</p>
-  
-        <Row className="g-2">
-          <Col md={5}>
-            <Form.Control
-              type="text"
-              placeholder="Parameter 1"
-              className="bg-dark text-white"
-            />
-          </Col>
-          <Col md={5}>
-            <Form.Control type="text" placeholder="Value 1" className="bg-dark text-white" />
-          </Col>
-          <Col md={2}>
-            <FeatherIcon
-              icon="plus-circle"
-              size="2.3em"
-              className="request-icons"
-            />
-            <FeatherIcon icon="delete" size="2.3em" className="request-icons" />
-          </Col>
-        </Row>
-      </div>
-    );
-  }
+  return (
+    <div className="px-4 parameter-area">
+      <p>Query Parameters</p>
+
+      <Row className="g-2">
+        <Col md={5}>
+          <Form.Control
+            type="text"
+            placeholder="Parameter 1"
+            className="bg-dark text-white"
+          />
+        </Col>
+        <Col md={5}>
+          <Form.Control
+            type="text"
+            placeholder="Value 1"
+            className="bg-dark text-white"
+          />
+        </Col>
+        <Col md={2}>
+          <FeatherIcon
+            icon="plus-circle"
+            size="2.3em"
+            className="request-icons"
+          />
+          <FeatherIcon icon="delete" size="2.3em" className="request-icons" />
+        </Col>
+      </Row>
+    </div>
+  );
+}
 
 function Body() {
   function Json() {
+
+
+    const [code, setCode] = useState("");
+    function handleChange(editor, data, value) {
+      setCode(value);
+    }
     return (
       <Col md={12}>
-        <Form.Control
-          as="textarea"
-          className="bg-dark body-input-field"
-          placeholder="Raw Request Body"
-        />
+          <CodeMirror
+            value={code}
+            theme="dark"
+            height="23vh"
+            inputMode="json"
+            extensions={[json()]}
+            onChange={handleChange}
+          />
       </Col>
     );
   }
@@ -103,7 +143,11 @@ function Headers() {
           />
         </Col>
         <Col md={5}>
-          <Form.Control type="text" placeholder="Value 1" className="bg-dark text-white" />
+          <Form.Control
+            type="text"
+            placeholder="Value 1"
+            className="bg-dark text-white"
+          />
         </Col>
         <Col md={2}>
           <FeatherIcon
