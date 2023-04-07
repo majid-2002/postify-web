@@ -106,25 +106,33 @@ body ::-webkit-scrollbar-thumb {
 }
 .main .history {
   height: 85%;
-  overflow-y: scroll;
   width: 20%;
   background-color: #171718;
   float: left;
   display: flow-root;
-  padding: 2em;
 }
-.main .history h3 {
+.main .history .history-text-area {
+  height: 7%;
+}
+.main .history .history-text-area h2 {
   color: #fafafa;
   font-family: inherit;
+  font-size: 1.5rem;
+  padding-left: 1.4em;
 }
-.main .history .history-card {
+.main .history .history-card-area {
+  height: 93%;
+  overflow-y: scroll;
+  padding: 2em;
+}
+.main .history .history-card-area .history-card {
   display: flex;
   justify-content: center;
   background-color: #212224;
   margin: 2em 0;
   overflow: hidden;
 }
-.main .history .history-card h3 {
+.main .history .history-card-area .history-card h3 {
   font-size: 1.2em;
   font-weight: bold;
   display: flex;
@@ -132,16 +140,16 @@ body ::-webkit-scrollbar-thumb {
   color: green;
   text-align: center;
 }
-.main .history .history-card span:nth-child(1) {
+.main .history .history-card-area .history-card span:nth-child(1) {
   -webkit-margin-end: 0.4em;
           margin-inline-end: 0.4em;
 }
-.main .history .history-card p:first-child {
+.main .history .history-card-area .history-card p:first-child {
   color: #fafafa;
   font-size: 0.9rem;
   margin-top: 1em;
 }
-.main .history .history-card p:last-child {
+.main .history .history-card-area .history-card p:last-child {
   color: #838383;
   word-spacing: 0.2em;
 }/*# sourceMappingURL=styles.css.map */
