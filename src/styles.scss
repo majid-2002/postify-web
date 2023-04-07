@@ -118,8 +118,11 @@ body {
     border-top: 1px silver inset;
 
     .result-container{
-      color: white;
-      text-align: center;
+      h4, p{
+        color: #fafafa;
+        font-size: 1rem;
+        text-align: center;
+      }
 
     }
 
