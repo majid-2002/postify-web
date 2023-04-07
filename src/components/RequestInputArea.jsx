@@ -14,6 +14,7 @@ function RequestInputArea() {
           onClick={() => {
             setshowComponentItem("parameter");
           }}
+          style={{color : showComponentItem === "parameter" ? "#fafafa" : ""}}
         >
           Parameters
         </li>
@@ -21,6 +22,8 @@ function RequestInputArea() {
           onClick={() => {
             setshowComponentItem("body");
           }}
+
+          style={{color : showComponentItem === "body" ? "#fafafa" : ""}}
         >
           Body
         </li>
@@ -28,6 +31,7 @@ function RequestInputArea() {
           onClick={() => {
             setshowComponentItem("header");
           }}
+          style={{color : showComponentItem === "header" ? "#fafafa" : ""}}
         >
           Header
         </li>
