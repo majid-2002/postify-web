@@ -50,16 +50,16 @@ body {
     width: 80%;
     background-color: #212224;
     float: right;
-    padding: 3.5em 3em;
+    padding: 3.5em 0;
   }
 
   //? REQUEST INPUT AREA
   .request-input-area {
-    padding: 2em 3em;
+    padding: 2em 0;
     color: #fafafa;
     user-select: none;
     width: 80%;
-    height: 40%;
+    height: 35%;
     float: right;
     background-color: #212224;
     overflow-y: scroll;
@@ -112,11 +112,17 @@ body {
   //? RESPONSE
   .response-area {
     width: 80%;
-    height: 45%;
+    height: 50%;
     background-color: #353739;
     float: right;
     border-top: 1px silver inset;
-    color: white;
+
+    .result-container{
+      color: white;
+      text-align: center;
+
+    }
+
   }
 
   //? HISTORY
@@ -128,21 +134,21 @@ body {
     float: left;
     display: flow-root;
 
-    
     .history-text-area {
       height: 7%;
       h2 {
         color: #fafafa;
         font-family: inherit;
         font-size: 1.5rem;
-        padding-left: 1.4em;
+        padding-left: 0.7em;
       }
     }
-    
+
     .history-card-area {
       height: 93%;
       overflow-y: scroll;
-      padding: 2em;
+      padding: 1em;
+     
 
       .history-card {
         display: flex;
@@ -152,7 +158,7 @@ body {
         overflow: hidden;
 
         h3 {
-          font-size: 1.2em;
+          font-size: clamp(14px, 1.5vw, 18px);
           font-weight: bold;
           display: flex;
           margin-top: 1.5em;

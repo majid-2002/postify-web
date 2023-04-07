@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Form, Dropdown } from "react-bootstrap";
 import FeatherIcon from "feather-icons-react";
 import CodeMirror from "@uiw/react-codemirror";
+import { dracula } from "@uiw/codemirror-theme-dracula";
 import { json } from "@codemirror/lang-json";
 
 function RequestInputArea() {
@@ -128,8 +129,8 @@ function Body() {
       <Col md={12}>
         <CodeMirror
           value={code}
-          theme="dark"
-          height="23vh"
+          theme={dracula}
+          height="20vh"
           inputMode="json"
           extensions={[json()]}
           onChange={handleChange}
@@ -139,7 +140,7 @@ function Body() {
   }
 
   return (
-    <div className="px-4 parameter-area">
+    <div className="px-3 parameter-area">
       <Row className="">
         <Col md={1} className="w-auto">
           <p>Content Type</p>
