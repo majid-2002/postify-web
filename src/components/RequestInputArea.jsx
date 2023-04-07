@@ -4,7 +4,6 @@ import FeatherIcon from "feather-icons-react";
 import CodeMirror from "@uiw/react-codemirror";
 import { json } from "@codemirror/lang-json";
 
-
 function RequestInputArea() {
   const [showComponentItem, setshowComponentItem] = useState("parameter");
 
@@ -46,7 +45,7 @@ function RequestInputArea() {
 
 function Parameters() {
   const [paramRows, setParamRows] = useState([
-    { param: "", value: "" } // initial row
+    { param: "", value: "" }, // initial row
   ]);
 
   function addNextLine() {
@@ -57,12 +56,11 @@ function Parameters() {
     const newParamRows = [...paramRows];
     newParamRows[index].param = event.target.value; //set the param with param index
     setParamRows(newParamRows);
-  
-    if (index === paramRows.length - 1 && event.target.value !== "") { // 
+
+    if (index === paramRows.length - 1 && event.target.value !== "") {
       addNextLine();
     }
   }
-  
 
   function handleValueChange(index, event) {
     const newParamRows = [...paramRows];
@@ -88,18 +86,18 @@ function Parameters() {
             <Form.Control
               type="text"
               placeholder={`Parameter ${index + 1}`}
-              className="bg-dark text-white"
+              className="bg-dark text-white border-info border-opacity-75" 
               value={row.param}
-              onChange={event => handleParamChange(index, event)}
+              onChange={(event) => handleParamChange(index, event)}
             />
           </Col>
           <Col md={5}>
             <Form.Control
               type="text"
               placeholder={`Value ${index + 1}`}
-              className="bg-dark text-white"
+              className="bg-dark text-white border-info border-opacity-75"
               value={row.value}
-              onChange={event => handleValueChange(index, event)}
+              onChange={(event) => handleValueChange(index, event)}
             />
           </Col>
           <Col md={1}>
@@ -116,10 +114,7 @@ function Parameters() {
   );
 }
 
-
 function Body() {
-
-
   function Json() {
     const [code, setCode] = useState("");
     function handleChange(editor, data, value) {
@@ -127,14 +122,14 @@ function Body() {
     }
     return (
       <Col md={12}>
-          <CodeMirror
-            value={code}
-            theme="dark"
-            height="23vh"
-            inputMode="json"
-            extensions={[json()]}
-            onChange={handleChange}
-          />
+        <CodeMirror
+          value={code}
+          theme="dark"
+          height="23vh"
+          inputMode="json"
+          extensions={[json()]}
+          onChange={handleChange}
+        />
       </Col>
     );
   }
@@ -171,33 +166,60 @@ function Body() {
 }
 
 function Headers() {
+  const [headerRows, setHeaderRows] = useState([{ 
+    header: "", value: "" 
+  }]);
+
+  function addNextLine() {
+    setHeaderRows([...headerRows, { header: "", value: "" }]);
+  }
+
+  function handleHeaderChange(index, event) {
+    const newHeaderRows = [...headerRows];
+    newHeaderRows[index].header = event.target.value; //set the param with param index
+    setHeaderRows(newHeaderRows);
+
+    if (index === headerRows.length - 1 && event.target.value !== "") {
+      //add next line if the there is 0 headers
+      addNextLine();
+    }
+  }
+
+  function handleValueChange(index, event) {
+    const newHeaderRows = [...headerRows];
+    newHeaderRows[index].value = event.target.value; //set the value using index
+    setHeaderRows(newHeaderRows);
+  }
+
   return (
     <div className="px-4 parameter-area">
       <p>Header List</p>
-      <Row className="g-2">
-        <Col md={5}>
-          <Form.Control
-            type="text"
-            placeholder="Parameter 1"
-            className="bg-dark text-white"
-          />
-        </Col>
-        <Col md={5}>
-          <Form.Control
-            type="text"
-            placeholder="Value 1"
-            className="bg-dark text-white"
-          />
-        </Col>
-        <Col md={2}>
-          <FeatherIcon
-            icon="plus-circle"
-            size="2.3em"
-            className="request-icons"
-          />
-          <FeatherIcon icon="delete" size="2.3em" className="request-icons" />
-        </Col>
-      </Row>
+
+      {headerRows.map((row, index) => (
+        <Row className="g-2 my-1" key={index}>
+          <Col md={6} className="">
+            <Form.Control
+              type="text"
+              placeholder={`Header ${index + 1}`}
+              value={row.header}
+              className="bg-dark text-white border-info border-opacity-75"
+              onChange={(event) => handleHeaderChange(index, event)}
+            />
+          </Col>
+          <Col md={5}>
+            <Form.Control
+              type="text"
+              placeholder={`Value ${index + 1}`}
+              className="bg-dark text-white border-info border-opacity-75"
+              value={row.value}
+              onChange={(event) => handleValueChange(index, event)}
+            />
+          </Col>
+          <Col md={1}>
+            <FeatherIcon icon="delete" size="2.3em" className="request-icons" />
+          </Col>
+        </Row>
+      ))}
     </div>
   );
 }

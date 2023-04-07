@@ -24,7 +24,7 @@ function RequestArea() {
         <Form.Control
           placeholder="Enter request URL"
           type="text"
-          className="bg-dark"
+          className="bg-dark border-info border-opacity-75"
           style={{
             paddingInline: "1em",
             marginRight: "1.6em",
