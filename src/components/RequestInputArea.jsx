@@ -45,42 +45,82 @@ function RequestInputArea() {
 }
 
 function Parameters() {
+  const [paramRows, setParamRows] = useState([
+    { param: "", value: "" } // initial row
+  ]);
+
+  function addNextLine() {
+    setParamRows([...paramRows, { param: "", value: "" }]); //add new param and row , with old values, to the paramrows
+  }
+
+  function handleParamChange(index, event) {
+    const newParamRows = [...paramRows];
+    newParamRows[index].param = event.target.value; //set the param with param index
+    setParamRows(newParamRows);
+  
+    if (index === paramRows.length - 1 && event.target.value !== "") { // 
+      addNextLine();
+    }
+  }
+  
+
+  function handleValueChange(index, event) {
+    const newParamRows = [...paramRows];
+    newParamRows[index].value = event.target.value; //set the value with value index
+    setParamRows(newParamRows);
+  }
+
+  function handleDeleteRow(index) {
+    if (index !== 0) {
+      const newParamRows = [...paramRows];
+      newParamRows.splice(index, 1);
+      setParamRows(newParamRows);
+    }
+  }
+
   return (
     <div className="px-4 parameter-area">
       <p>Query Parameters</p>
 
-      <Row className="g-2">
-        <Col md={5}>
-          <Form.Control
-            type="text"
-            placeholder="Parameter 1"
-            className="bg-dark text-white"
-          />
-        </Col>
-        <Col md={5}>
-          <Form.Control
-            type="text"
-            placeholder="Value 1"
-            className="bg-dark text-white"
-          />
-        </Col>
-        <Col md={2}>
-          <FeatherIcon
-            icon="plus-circle"
-            size="2.3em"
-            className="request-icons"
-          />
-          <FeatherIcon icon="delete" size="2.3em" className="request-icons" />
-        </Col>
-      </Row>
+      {paramRows.map((row, index) => (
+        <Row className="g-2 my-1" key={index}>
+          <Col md={6}>
+            <Form.Control
+              type="text"
+              placeholder={`Parameter ${index + 1}`}
+              className="bg-dark text-white"
+              value={row.param}
+              onChange={event => handleParamChange(index, event)}
+            />
+          </Col>
+          <Col md={5}>
+            <Form.Control
+              type="text"
+              placeholder={`Value ${index + 1}`}
+              className="bg-dark text-white"
+              value={row.value}
+              onChange={event => handleValueChange(index, event)}
+            />
+          </Col>
+          <Col md={1}>
+            <FeatherIcon
+              icon="delete"
+              size="2.3em"
+              className="request-icons"
+              onClick={() => handleDeleteRow(index)}
+            />
+          </Col>
+        </Row>
+      ))}
     </div>
   );
 }
 
+
 function Body() {
+
+
   function Json() {
-
-
     const [code, setCode] = useState("");
     function handleChange(editor, data, value) {
       setCode(value);
@@ -102,7 +142,7 @@ function Body() {
   return (
     <div className="px-4 parameter-area">
       <Row className="">
-        <Col md={1}>
+        <Col md={1} className="w-auto">
           <p>Content Type</p>
         </Col>
         <Col md={1}>

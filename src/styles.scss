@@ -11,6 +11,7 @@
 
 body{
     /* Customize the scrollbar */
+
   ::-webkit-scrollbar {
     width: 8px;
   }
@@ -61,15 +62,16 @@ body{
     color: #fafafa;
     user-select: none;
     width: 80%;
-    height: 35%;
+    height: 40%;
     float: right;
     background-color: #212224;
+    overflow-y: scroll;
     ul{
       padding: 0;
       li{
         font-weight: 500;
         list-style: none;
-        font-size: 1.1rem;
+        font-size: 1rem;
         color: #fafafa7b;
         display: inline;
         margin-inline: 1.4em;
@@ -83,6 +85,7 @@ body{
     }
 
     .parameter-area{
+
       p{
         color: #fafafa5a;
         font-size: 0.9em;
@@ -116,9 +119,10 @@ body{
   //? RESPONSE
   .response-area {
     width: 80%;
-    height: 50%;
-    background-color: #212224;
+    height: 45%;
+    background-color: #353739;
     float: right;
+    border-top: 1px silver inset;
     color: white;
   }
 
@@ -143,9 +147,11 @@ body{
       justify-content: center;
       background-color: #212224;
       margin: 2em 0;
+      overflow: hidden;
 
       h3{
-        font-size: 1.4em;
+        font-size: 1.2em;
+        font-weight: bold;
         display: flex;
         margin-top: 1.5em;
         color: green;
@@ -156,9 +162,10 @@ body{
       }
       p:first-child{
         color: #fafafa;
+        font-size: 0.9rem;
         margin-top: 1em;
       }
-      p:nth-child(2){
+      p:last-child{
         color: #838383;
         word-spacing: 0.2em;
       }

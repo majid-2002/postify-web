@@ -53,9 +53,10 @@ body ::-webkit-scrollbar-thumb {
      -moz-user-select: none;
           user-select: none;
   width: 80%;
-  height: 35%;
+  height: 40%;
   float: right;
   background-color: #212224;
+  overflow-y: scroll;
 }
 .main .request-input-area ul {
   padding: 0;
@@ -63,7 +64,7 @@ body ::-webkit-scrollbar-thumb {
 .main .request-input-area ul li {
   font-weight: 500;
   list-style: none;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: rgba(250, 250, 250, 0.4823529412);
   display: inline;
   margin-inline: 1.4em;
@@ -95,27 +96,13 @@ body ::-webkit-scrollbar-thumb {
   margin-inline: 0.4em;
   cursor: pointer;
 }
-.main .request-input-area .parameter-area .body-input-field {
-  height: 15em;
-  border: none;
-  height: 14em;
-  color: #fafafa;
-  resize: none;
-  font-family: monospace;
-}
-.main .request-input-area .parameter-area .body-input-field::-moz-placeholder {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-}
-.main .request-input-area .parameter-area .body-input-field::placeholder {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-}
 .main .response-area {
   width: 80%;
-  height: 50%;
-  background-color: #212224;
+  height: 45%;
+  background-color: #353739;
   float: right;
+  border-top: 1px silver inset;
+  color: white;
 }
 .main .history {
   height: 85%;
@@ -135,9 +122,11 @@ body ::-webkit-scrollbar-thumb {
   justify-content: center;
   background-color: #212224;
   margin: 2em 0;
+  overflow: hidden;
 }
 .main .history .history-card h3 {
-  font-size: 1.4em;
+  font-size: 1.2em;
+  font-weight: bold;
   display: flex;
   margin-top: 1.5em;
   color: green;
@@ -149,9 +138,10 @@ body ::-webkit-scrollbar-thumb {
 }
 .main .history .history-card p:first-child {
   color: #fafafa;
+  font-size: 0.9rem;
   margin-top: 1em;
 }
-.main .history .history-card p:nth-child(2) {
+.main .history .history-card p:last-child {
   color: #838383;
   word-spacing: 0.2em;
 }/*# sourceMappingURL=styles.css.map */
