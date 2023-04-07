@@ -130,7 +130,7 @@ function Body() {
         <CodeMirror
           value={code}
           theme={dracula}
-          height="20vh"
+          height="25vh"
           inputMode="json"
           extensions={[json()]}
           onChange={handleChange}
@@ -140,7 +140,7 @@ function Body() {
   }
 
   return (
-    <div className="px-3 parameter-area">
+    <div className="px-4 parameter-area">
       <Row className="">
         <Col md={1} className="w-auto">
           <p>Content Type</p>
