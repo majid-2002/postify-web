@@ -41,7 +41,7 @@ body {
 
     h1 {
       color: #0d6efd;
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
   }
 
@@ -158,12 +158,9 @@ body {
         background-color: #212224;
         margin: 2em 0;
         overflow: hidden;
+        border: 1px solid #30363d;
 
         h3 {
-          font-size: clamp(14px, 1.5vw, 18px);
-          font-weight: bold;
-          display: flex;
-          margin-top: 1.5em;
           color: green;
           text-align: center;
         }
@@ -172,8 +169,6 @@ body {
         }
         p:first-child {
           color: #fafafa;
-          font-size: 0.9rem;
-          margin-top: 1em;
         }
         p:last-child {
           color: #838383;

@@ -4,6 +4,9 @@ import FeatherIcon from "feather-icons-react";
 import CodeMirror from "@uiw/react-codemirror";
 import { dracula } from "@uiw/codemirror-theme-dracula";
 import { json } from "@codemirror/lang-json";
+import { javascript } from "@codemirror/lang-javascript";
+import { xml } from "@codemirror/lang-xml";
+import { html } from "@codemirror/lang-html";
 
 function RequestInputArea() {
   const [showComponentItem, setshowComponentItem] = useState("parameter");
@@ -15,7 +18,7 @@ function RequestInputArea() {
           onClick={() => {
             setshowComponentItem("parameter");
           }}
-          style={{color : showComponentItem === "parameter" ? "#fafafa" : ""}}
+          style={{ color: showComponentItem === "parameter" ? "#fafafa" : "" }}
         >
           Parameters
         </li>
@@ -23,8 +26,7 @@ function RequestInputArea() {
           onClick={() => {
             setshowComponentItem("body");
           }}
-
-          style={{color : showComponentItem === "body" ? "#fafafa" : ""}}
+          style={{ color: showComponentItem === "body" ? "#fafafa" : "" }}
         >
           Body
         </li>
@@ -32,7 +34,7 @@ function RequestInputArea() {
           onClick={() => {
             setshowComponentItem("header");
           }}
-          style={{color : showComponentItem === "header" ? "#fafafa" : ""}}
+          style={{ color: showComponentItem === "header" ? "#fafafa" : "" }}
         >
           Header
         </li>
@@ -91,7 +93,7 @@ function Parameters() {
             <Form.Control
               type="text"
               placeholder={`Parameter ${index + 1}`}
-              className="bg-dark text-white border-info border-opacity-75" 
+              className="bg-dark text-white border-info border-opacity-75"
               value={row.param}
               onChange={(event) => handleParamChange(index, event)}
             />
@@ -120,23 +122,30 @@ function Parameters() {
 }
 
 function Body() {
+  const [value, setValue] = useState("JSON");
+
   function Json() {
     const [code, setCode] = useState("");
+
     function handleChange(editor, data, value) {
       setCode(value);
     }
+
     return (
       <Col md={12}>
         <CodeMirror
           value={code}
           theme={dracula}
           height="25vh"
-          inputMode="json"
-          extensions={[json()]}
+          extensions={value === "JSON" ? [json()] : ( value === "JavaScript" ? [javascript()] : (value === "HTML" ? [html()] : [xml()])) }
           onChange={handleChange}
         />
       </Col>
     );
+  }
+
+  function handleDropDownValue(event) {
+    setValue(event.target.textContent);
   }
 
   return (
@@ -148,17 +157,19 @@ function Body() {
         <Col md={1}>
           <Dropdown>
             <Dropdown.Toggle variant="plain" className="custom-dropdown-toggle">
-              JSON
+              {value}
             </Dropdown.Toggle>
             <Dropdown.Menu variant="dark">
-              <Dropdown.Header>Items</Dropdown.Header>
-              <Dropdown.Item>application/json</Dropdown.Item>
-              <Dropdown.Item>Item 2</Dropdown.Item>
+              <Dropdown.Item onClick={handleDropDownValue}>Text</Dropdown.Item>
+              <Dropdown.Item onClick={handleDropDownValue}>JSON</Dropdown.Item>
               <Dropdown.Divider
                 style={{ backgroundColor: "grey" }}
               ></Dropdown.Divider>
-              <Dropdown.Item>Item 1</Dropdown.Item>
-              <Dropdown.Item>Item 2</Dropdown.Item>
+              <Dropdown.Item onClick={handleDropDownValue}>
+                JavaScript
+              </Dropdown.Item>
+              <Dropdown.Item onClick={handleDropDownValue}>HTML</Dropdown.Item>
+              <Dropdown.Item onClick={handleDropDownValue}>XML</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Col>
@@ -171,9 +182,12 @@ function Body() {
 }
 
 function Headers() {
-  const [headerRows, setHeaderRows] = useState([{ 
-    header: "", value: "" 
-  }]);
+  const [headerRows, setHeaderRows] = useState([
+    {
+      header: "",
+      value: "",
+    },
+  ]);
 
   function addNextLine() {
     setHeaderRows([...headerRows, { header: "", value: "" }]);

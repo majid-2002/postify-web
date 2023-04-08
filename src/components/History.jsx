@@ -5,10 +5,10 @@ function HistoryCard() {
   return (
     <div className="history-card rounded-2">
       <Row>
-        <Col>
-          <h3>GET</h3>
+        <Col className="d-flex align-items-center">
+          <h3 className="fs-5">GET</h3>
         </Col>
-        <Col>
+        <Col className="pt-2">
           <p>https://google.com/favicon.ico</p>
           <p>
             <span>21:15</span>
