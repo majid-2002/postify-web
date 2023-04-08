@@ -64,6 +64,19 @@ body {
     float: right;
     background-color: #212224;
     overflow-y: scroll;
+
+
+    .cm-editor, .cm-gutters{
+      background-color: transparent;
+      border: 1px solid #30363d;
+    }
+    .cm-gutters{
+      text-align: center;
+    }
+    .cm-lineNumbers{
+      width: 2vw;
+    }
+
     ul {
       padding: 0;
       li {
@@ -92,7 +105,6 @@ body {
         background-color: none;
         color: #fafafa7b;
         padding: 0;
-
         border: none;
         font-weight: 500;
         box-shadow: none !important;
@@ -122,12 +134,26 @@ body {
     float: right;
     border-top: 1px silver inset;
 
+
+    .cm-editor, .cm-gutters{
+      background-color: transparent;
+      border: 1px solid #4d5157;
+    }
+    .cm-gutters{
+      text-align: center;
+    }
+    .cm-lineNumbers{
+      width: 2vw;
+    }
+
     .result-container{
       h4, p{
         color: #fafafa;
         font-size: 1rem;
         text-align: center;
       }
+
+      
 
     }
 

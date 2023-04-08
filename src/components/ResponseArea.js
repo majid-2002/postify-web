@@ -23,9 +23,10 @@ export default function ResponseArea() {
       <Row>
         <CodeMirror
           value="Your response goes here."
+          readOnly={true}
+          placeholder={"Your response goes here."}
           theme={dracula}
           height="40vh"
-          options={{ readOnly: true}}
         />
       </Row>
     </div>

@@ -92,7 +92,7 @@ function Parameters() {
           <Form.Control
             type="text"
             placeholder={`Parameter ${index + 1}`}
-            className="bg-dark text-white border-info border-opacity-75"
+            className="bg-dark text-white border-primary border-opacity-75 rounded-0 form-control-sm"
             value={row.param}
             onChange={(event) => handleParamChange(index, event)}
           />
@@ -101,7 +101,7 @@ function Parameters() {
           <Form.Control
             type="text"
             placeholder={`Value ${index + 1}`}
-            className="bg-dark text-white border-info border-opacity-75"
+            className="bg-dark text-white border-primary border-opacity-75 rounded-0 form-control-sm"
             value={row.value}
             onChange={(event) => handleValueChange(index, event)}
           />
@@ -252,7 +252,7 @@ function Headers() {
             type="text"
             placeholder={`Header ${index + 1}`}
             value={row.header}
-            className="bg-dark text-white border-info border-opacity-75"
+            className="bg-dark text-white border-primary border-opacity-75 rounded-0 form-control-sm"
             onChange={(event) => handleHeaderChange(index, event)}
           />
         </Col>
@@ -260,7 +260,7 @@ function Headers() {
           <Form.Control
             type="text"
             placeholder={`Value ${index + 1}`}
-            className="bg-dark text-white border-info border-opacity-75"
+            className="bg-dark text-white border-primary border-opacity-75 rounded-0 form-control-sm"
             value={row.value}
             onChange={(event) => handleValueChange(index, event)}
           />
