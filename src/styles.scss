@@ -23,6 +23,8 @@ body {
   ::-webkit-scrollbar-thumb {
     background-color: #555;
   }
+
+  font-size: 14px;
 }
 
 .main {
@@ -104,6 +106,10 @@ body {
         color: #0d6efd;
         margin-inline: 0.4em;
         cursor: pointer;
+      }
+
+      .btn-parameter-container{
+        height: 20vh;
       }
     }
   }

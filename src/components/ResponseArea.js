@@ -25,6 +25,7 @@ export default function ResponseArea() {
           value="Your response goes here."
           theme={dracula}
           height="40vh"
+          options={{ readOnly: true}}
         />
       </Row>
     </div>

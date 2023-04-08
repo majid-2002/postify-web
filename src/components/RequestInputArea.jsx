@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Form, Dropdown } from "react-bootstrap";
+import { Row, Col, Form, Dropdown, Button } from "react-bootstrap";
 import FeatherIcon from "feather-icons-react";
 import CodeMirror from "@uiw/react-codemirror";
 import { dracula } from "@uiw/codemirror-theme-dracula";
@@ -50,18 +50,22 @@ function RequestInputArea() {
   );
 }
 
+// Parameters Component
 function Parameters() {
   const [paramRows, setParamRows] = useState([
-    { param: "", value: "" }, // initial row
+    {
+      Parameter: "",
+      value: "",
+    },
   ]);
 
   function addNextLine() {
-    setParamRows([...paramRows, { param: "", value: "" }]); //add new param and row , with old values, to the paramrows
+    setParamRows([...paramRows, { param: "", value: "" }]);
   }
 
   function handleParamChange(index, event) {
     const newParamRows = [...paramRows];
-    newParamRows[index].param = event.target.value; //set the param with param index
+    newParamRows[index].param = event.target.value;
     setParamRows(newParamRows);
 
     if (index === paramRows.length - 1 && event.target.value !== "") {
@@ -71,56 +75,71 @@ function Parameters() {
 
   function handleValueChange(index, event) {
     const newParamRows = [...paramRows];
-    newParamRows[index].value = event.target.value; //set the value with value index
+    newParamRows[index].value = event.target.value;
     setParamRows(newParamRows);
   }
 
   function handleDeleteRow(index) {
-    if (index !== 0) {
-      const newParamRows = [...paramRows];
-      newParamRows.splice(index, 1);
-      setParamRows(newParamRows);
-    }
+    const newParamRows = [...paramRows];
+    newParamRows.splice(index, 1);
+    setParamRows(newParamRows);
+  }
+
+  function renderParamRow(row, index) {
+    return (
+      <Row className="g-2 my-1" key={index}>
+        <Col md={6}>
+          <Form.Control
+            type="text"
+            placeholder={`Parameter ${index + 1}`}
+            className="bg-dark text-white border-info border-opacity-75"
+            value={row.param}
+            onChange={(event) => handleParamChange(index, event)}
+          />
+        </Col>
+        <Col md={5}>
+          <Form.Control
+            type="text"
+            placeholder={`Value ${index + 1}`}
+            className="bg-dark text-white border-info border-opacity-75"
+            value={row.value}
+            onChange={(event) => handleValueChange(index, event)}
+          />
+        </Col>
+        <Col md={1}>
+          <FeatherIcon
+            icon="delete"
+            size="2.3em"
+            className="request-icons"
+            onClick={() => handleDeleteRow(index)}
+          />
+        </Col>
+      </Row>
+    );
   }
 
   return (
     <div className="px-4 parameter-area">
       <p>Query Parameters</p>
 
-      {paramRows.map((row, index) => (
-        <Row className="g-2 my-1" key={index}>
-          <Col md={6}>
-            <Form.Control
-              type="text"
-              placeholder={`Parameter ${index + 1}`}
-              className="bg-dark text-white border-info border-opacity-75"
-              value={row.param}
-              onChange={(event) => handleParamChange(index, event)}
-            />
-          </Col>
-          <Col md={5}>
-            <Form.Control
-              type="text"
-              placeholder={`Value ${index + 1}`}
-              className="bg-dark text-white border-info border-opacity-75"
-              value={row.value}
-              onChange={(event) => handleValueChange(index, event)}
-            />
-          </Col>
-          <Col md={1}>
-            <FeatherIcon
-              icon="delete"
-              size="2.3em"
-              className="request-icons"
-              onClick={() => handleDeleteRow(index)}
-            />
-          </Col>
-        </Row>
-      ))}
+      {paramRows.length > 0 ? (
+        paramRows.map(renderParamRow)
+      ) : (
+        <div className="d-flex align-items-center justify-content-center btn-group-sm btn-parameter-container">
+          <Button
+            className="btn btn-outline-info btn-dark d-block"
+            onClick={addNextLine}
+          >
+            <FeatherIcon icon="plus" size="1.4em" />
+            Add Parameter
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
 
+// Body Component
 function Body() {
   const [value, setValue] = useState("JSON");
 
@@ -137,7 +156,15 @@ function Body() {
           value={code}
           theme={dracula}
           height="25vh"
-          extensions={value === "JSON" ? [json()] : ( value === "JavaScript" ? [javascript()] : (value === "HTML" ? [html()] : [xml()])) }
+          extensions={
+            value === "JSON"
+              ? [json()]
+              : value === "JavaScript"
+              ? [javascript()]
+              : value === "HTML"
+              ? [html()]
+              : [xml()]
+          }
           onChange={handleChange}
         />
       </Col>
@@ -181,6 +208,7 @@ function Body() {
   );
 }
 
+// Headers Component
 function Headers() {
   const [headerRows, setHeaderRows] = useState([
     {
@@ -204,41 +232,68 @@ function Headers() {
     }
   }
 
+  function handleDeleteRow(index) {
+    const newHeaderRows = [...headerRows];
+    newHeaderRows.splice(index, 1);
+    setHeaderRows(newHeaderRows);
+  }
+
   function handleValueChange(index, event) {
     const newHeaderRows = [...headerRows];
     newHeaderRows[index].value = event.target.value; //set the value using index
     setHeaderRows(newHeaderRows);
   }
 
+  function renderHeaderRow(row, index) {
+    return (
+      <Row className="g-2 my-1" key={index}>
+        <Col md={6} className="">
+          <Form.Control
+            type="text"
+            placeholder={`Header ${index + 1}`}
+            value={row.header}
+            className="bg-dark text-white border-info border-opacity-75"
+            onChange={(event) => handleHeaderChange(index, event)}
+          />
+        </Col>
+        <Col md={5}>
+          <Form.Control
+            type="text"
+            placeholder={`Value ${index + 1}`}
+            className="bg-dark text-white border-info border-opacity-75"
+            value={row.value}
+            onChange={(event) => handleValueChange(index, event)}
+          />
+        </Col>
+        <Col md={1}>
+          <FeatherIcon
+            icon="delete"
+            size="2.3em"
+            className="request-icons"
+            onClick={() => handleDeleteRow(index)}
+          />
+        </Col>
+      </Row>
+    );
+  }
+
   return (
     <div className="px-4 parameter-area">
       <p>Header List</p>
 
-      {headerRows.map((row, index) => (
-        <Row className="g-2 my-1" key={index}>
-          <Col md={6} className="">
-            <Form.Control
-              type="text"
-              placeholder={`Header ${index + 1}`}
-              value={row.header}
-              className="bg-dark text-white border-info border-opacity-75"
-              onChange={(event) => handleHeaderChange(index, event)}
-            />
-          </Col>
-          <Col md={5}>
-            <Form.Control
-              type="text"
-              placeholder={`Value ${index + 1}`}
-              className="bg-dark text-white border-info border-opacity-75"
-              value={row.value}
-              onChange={(event) => handleValueChange(index, event)}
-            />
-          </Col>
-          <Col md={1}>
-            <FeatherIcon icon="delete" size="2.3em" className="request-icons" />
-          </Col>
-        </Row>
-      ))}
+      {headerRows.length > 0 ? (
+        headerRows.map(renderHeaderRow)
+      ) : (
+        <div className="d-flex align-items-center justify-content-center btn-group-sm btn-parameter-container">
+          <Button
+            className="btn btn-outline-info btn-dark d-block"
+            onClick={addNextLine}
+          >
+            <FeatherIcon icon="plus" size="1.4em" />
+            Add Header
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
