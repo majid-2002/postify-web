@@ -183,7 +183,7 @@ function Body() {
         </Col>
         <Col md={1}>
           <Dropdown>
-            <Dropdown.Toggle variant="plain" className="custom-dropdown-toggle">
+            <Dropdown.Toggle variant="plain" className="custom-dropdown-toggle" style={{fontSize: "1rem", padding: "0"}}>
               {value}
             </Dropdown.Toggle>
             <Dropdown.Menu variant="dark">
