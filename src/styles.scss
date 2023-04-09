@@ -53,6 +53,18 @@ body {
     background-color: #212224;
     float: right;
     padding: 3.5em 0;
+
+    .btn-dropdown-request{
+      width: 5vw;
+      font-weight: 500;
+      font-size: 1rem;
+      cursor: pointer;
+      &:hover{
+        color: #fafafa;
+      }
+    }
+
+
   }
 
   //? REQUEST INPUT AREA
