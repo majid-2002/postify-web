@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, Form, Dropdown, Button } from "react-bootstrap";
 import FeatherIcon from "feather-icons-react";
 import CodeMirror from "@uiw/react-codemirror";
@@ -52,6 +52,18 @@ function RequestInputArea() {
 
 function Parameters() {
   const [paramRows, setParamRows] = useState([{ param: "", value: "" }]);
+
+
+  useEffect(() => {
+    const urlParameters = {};
+    paramRows.forEach(({param, value}) => {
+      if (param.trim() !== "" && value.trim() !== "") {
+        urlParameters[param.trim()] = value.trim();
+      }
+    });
+    console.log(urlParameters);
+  }, [paramRows]);
+  
 
   const handleInputChange = (index, key) => (event) => {
     const newParamRows = [...paramRows];
@@ -192,11 +204,21 @@ function Body() {
 function Headers() {
   const [headerRows, setHeaderRows] = useState([{ header: "", value: "" }]);
 
+  useEffect(() => {
+    const urlHeaders = {};
+    headerRows.forEach(({header, value}) => {
+      if (header.trim() !== "" && value.trim() !== "") {
+        urlHeaders[header.trim()] = value.trim();
+      }
+    });
+    console.log(urlHeaders);
+  }, [headerRows]);
+
+
   function handleInputChange(index, key, value) {
     const newHeaderRows = [...headerRows];
     newHeaderRows[index][key] = value;
     setHeaderRows(newHeaderRows);
-
     if (index === headerRows.length - 1 && value !== "") {
       setHeaderRows([...newHeaderRows, { header: "", value: "" }]);
     }
