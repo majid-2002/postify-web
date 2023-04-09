@@ -24,6 +24,7 @@ function RequestArea() {
             <Dropdown.Item onClick={handleRequestType}>PUT</Dropdown.Item>
             <Dropdown.Item onClick={handleRequestType}>PATCH</Dropdown.Item>
             <Dropdown.Item onClick={handleRequestType}>DELETE</Dropdown.Item>
+            <Dropdown.Item onClick={handleRequestType}>HEAD</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
         <Form.Control
@@ -33,6 +34,7 @@ function RequestArea() {
           style={{
             paddingInline: "1em",
             marginRight: "1.6em",
+            borderRadius: "0 6px 6px 0",
             outline: "none",
             color: "#fafafa",
           }}
