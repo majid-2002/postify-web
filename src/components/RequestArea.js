@@ -2,13 +2,13 @@ import React from "react";
 import { Button, Dropdown } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 
-function RequestArea() {
-
-  const [requestType, setRequestType] = React.useState("GET");
+function RequestArea({ endpoint, setEndpoint, makeApiCall }) {
 
   const handleRequestType = (e) => {
-    setRequestType(e.target.innerText);
+    setEndpoint({ ...endpoint, method: e.target.innerText });
   };
+
+
 
 
   return (
@@ -16,7 +16,7 @@ function RequestArea() {
       <div className="d-flex justify-content-center px-4">
         <Dropdown className="">
           <Dropdown.Toggle className="rounded-0 btn-dropdown-request" >
-            {requestType}
+            {endpoint.method}
           </Dropdown.Toggle>
           <Dropdown.Menu variant="dark">
             <Dropdown.Item onClick={handleRequestType}>GET</Dropdown.Item>
@@ -28,6 +28,7 @@ function RequestArea() {
           </Dropdown.Menu>
         </Dropdown>
         <Form.Control
+          onChange={(e) => setEndpoint({ ...endpoint, url: e.target.value })}
           placeholder="Enter request URL"
           type="text"
           className="bg-dark border-info border-opacity-75 rounded-0"

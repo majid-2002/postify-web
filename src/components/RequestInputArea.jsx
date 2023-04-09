@@ -8,7 +8,7 @@ import { javascript } from "@codemirror/lang-javascript";
 import { xml } from "@codemirror/lang-xml";
 import { html } from "@codemirror/lang-html";
 
-function RequestInputArea() {
+function RequestInputArea({ endpoint, setEndpoint}) {
   const [showComponentItem, setshowComponentItem] = useState("parameter");
 
   return (
@@ -40,11 +40,11 @@ function RequestInputArea() {
         </li>
       </ul>
       {showComponentItem === "parameter" ? (
-        <Parameters />
+        <Parameters endpoint={endpoint} setEndpoint={setEndpoint} />
       ) : showComponentItem === "body" ? (
-        <Body />
+        <Body endpoint={endpoint} setEndpoint={setEndpoint} />
       ) : (
-        <Headers />
+        <Headers endpoint={endpoint} setEndpoint={setEndpoint} />
       )}
     </div>
   );
@@ -132,11 +132,11 @@ function Parameters() {
 function Body() {
   const [value, setValue] = useState("JSON");
 
-  function Json() {
+  function TextFormat() {
     const [code, setCode] = useState("");
 
-    function handleChange(editor, data, value) {
-      setCode(value);
+    function handleChange(inputcode) {
+      setCode(inputcode)
     }
 
     return (
@@ -195,13 +195,13 @@ function Body() {
         </Col>
       </Row>
       <Row className="g-2">
-        <Json />
+        <TextFormat />
       </Row>
     </div>
   );
 }
 
-function Headers() {
+function Headers({endpoint, setEndpoint}) {
   const [headerRows, setHeaderRows] = useState([{ header: "", value: "" }]);
 
   useEffect(() => {
@@ -210,8 +210,8 @@ function Headers() {
       if (header.trim() !== "" && value.trim() !== "") {
         urlHeaders[header.trim()] = value.trim();
       }
+      setEndpoint({...endpoint, headers: urlHeaders})
     });
-    console.log(urlHeaders);
   }, [headerRows]);
 
 

@@ -4,14 +4,31 @@ import RequestArea from "./components/RequestArea";
 import ResponseArea from "./components/ResponseArea";
 import History from "./components/History";
 import RequestInputArea from "./components/RequestInputArea";
+import { makeApiCall } from "./components/functions/makeApiCall";
 
 function App() {
+
+  const [endpoint, setEndpoint] = React.useState({
+    "url": "",
+    "method": "GET",
+    "headers": {},
+    "params": {},
+    "body": {}
+  });
+
   return (
     <div className="main">
       <HeaderArea />
-      <RequestArea />
+      <RequestArea 
+        endpoint={endpoint}
+        setEndpoint={setEndpoint}
+        makeApiCall={makeApiCall}
+      />
       <History />
-      <RequestInputArea />
+      <RequestInputArea 
+        endpoint={endpoint}
+        setEndpoint={setEndpoint}
+      />
       <ResponseArea />
     </div>
   );
