@@ -8,7 +8,7 @@ import { javascript } from "@codemirror/lang-javascript";
 import { xml } from "@codemirror/lang-xml";
 import { html } from "@codemirror/lang-html";
 
-function RequestInputArea({ endpoint, setEndpoint}) {
+function RequestInputArea({ endpoint, setEndpoint }) {
   const [showComponentItem, setshowComponentItem] = useState("parameter");
 
   return (
@@ -50,20 +50,19 @@ function RequestInputArea({ endpoint, setEndpoint}) {
   );
 }
 
-function Parameters() {
+function Parameters({ endpoint, setEndpoint }) {
   const [paramRows, setParamRows] = useState([{ param: "", value: "" }]);
-
 
   useEffect(() => {
     const urlParameters = {};
-    paramRows.forEach(({param, value}) => {
+    paramRows.forEach(({ param, value }) => {
       if (param.trim() !== "" && value.trim() !== "") {
         urlParameters[param.trim()] = value.trim();
       }
+      setEndpoint({ ...endpoint, params: urlParameters });
     });
-    console.log(urlParameters);
+    // eslint-disable-next-line
   }, [paramRows]);
-  
 
   const handleInputChange = (index, key) => (event) => {
     const newParamRows = [...paramRows];
@@ -129,20 +128,23 @@ function Parameters() {
 }
 
 // Body Component
-function Body() {
+function Body({setEndpoint,  endpoint}) {
   const [value, setValue] = useState("JSON");
 
   function TextFormat() {
-    const [code, setCode] = useState("");
 
-    function handleChange(inputcode) {
-      setCode(inputcode)
+
+
+    // I want to pass the value to setEndpoint({ ...endpoint, body: newValue }) but it is not working. help ME !!
+    const handleChange = (value) => {
+      let newValue = value.replace(/(\r\n|\n|\r)/gm, "").trim();
     }
+
+
 
     return (
       <Col md={12}>
         <CodeMirror
-          value={code}
           theme={dracula}
           height="25vh"
           extensions={
@@ -201,19 +203,19 @@ function Body() {
   );
 }
 
-function Headers({endpoint, setEndpoint}) {
+function Headers({ endpoint, setEndpoint }) {
   const [headerRows, setHeaderRows] = useState([{ header: "", value: "" }]);
 
   useEffect(() => {
     const urlHeaders = {};
-    headerRows.forEach(({header, value}) => {
+    headerRows.forEach(({ header, value }) => {
       if (header.trim() !== "" && value.trim() !== "") {
         urlHeaders[header.trim()] = value.trim();
       }
-      setEndpoint({...endpoint, headers: urlHeaders})
+      setEndpoint({ ...endpoint, headers: urlHeaders });
     });
+    // eslint-disable-next-line
   }, [headerRows]);
-
 
   function handleInputChange(index, key, value) {
     const newHeaderRows = [...headerRows];
