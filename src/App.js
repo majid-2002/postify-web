@@ -10,9 +10,9 @@ function App() {
   const [endpoint, setEndpoint] = React.useState({
     "url": "",
     "method": "GET",
-    "headers": {},
-    "params": {},
-    "body": "",
+    "headers": "",
+    "params": "",
+    "body": null,
     "contentType": ""
   });
 

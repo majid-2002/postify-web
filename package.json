@@ -17,6 +17,7 @@
     "axios": "^1.3.4",
     "bootstrap": "^5.2.3",
     "codemirror": "^6.0.1",
+    "cors": "^2.8.5",
     "feather-icons-react": "^0.6.2",
     "postcss-cli": "^10.1.0",
     "react": "^18.2.0",

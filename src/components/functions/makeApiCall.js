@@ -1,6 +1,8 @@
 import axios from "axios";
 
+
 export const makeApiCall = async (endpoint) => {
+
   const config = {
     method: endpoint.method,
     url: endpoint.url,
@@ -11,7 +13,7 @@ export const makeApiCall = async (endpoint) => {
     params: { ...endpoint.params },
     data: endpoint.body,
   };
-
+  
   try {
     const response = await axios(config);
     return response;
