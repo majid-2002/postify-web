@@ -4,7 +4,6 @@ import RequestArea from "./components/RequestArea";
 import ResponseArea from "./components/ResponseArea";
 import History from "./components/History";
 import RequestInputArea from "./components/RequestInputArea";
-import { makeApiCall } from "./components/functions/makeApiCall";
 
 function App() {
 
@@ -23,7 +22,6 @@ function App() {
       <RequestArea 
         endpoint={endpoint}
         setEndpoint={setEndpoint}
-        makeApiCall={makeApiCall}
       />
       <History />
       <RequestInputArea 

@@ -1,20 +1,20 @@
 import axios from "axios";
 
-export const makeApiCall = async (endpoint, method, headers, params, body) => {
+export const makeApiCall = async (endpoint) => {
   const config = {
-    method,
-    url: endpoint,
+    method: endpoint.method,
+    url: endpoint.url,
     headers: {
-      ...headers,
-      "Content-Type": "application/json",
+      ...endpoint.headers,
+      "Content-Type": endpoint.contentType,
     },
-    params: { ...params },
-    data: body,
+    params: { ...endpoint.params },
+    data: endpoint.body,
   };
 
   try {
     const response = await axios(config);
-    return response.data;
+    return response;
   } catch (error) {
     throw error;
   }
