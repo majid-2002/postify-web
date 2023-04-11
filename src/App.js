@@ -13,7 +13,8 @@ function App() {
     "method": "GET",
     "headers": {},
     "params": {},
-    "body": ""
+    "body": "",
+    "contentType": ""
   });
 
   return (

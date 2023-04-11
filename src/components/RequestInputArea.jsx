@@ -129,39 +129,63 @@ function Parameters({ endpoint, setEndpoint }) {
 
 // Body Component
 function Body({ setEndpoint, endpoint }) {
-  const [value, setValue] = useState("JSON");
+  const [contentType, setcontentType] = useState("JSON");
 
   function TextFormat() {
-    // I want to pass the value to setEndpoint({ ...endpoint, body: newValue }) but it is not working. help ME !!
     const handleChange = (value) => {
-      let newValue = value.replace(/(\r\n|\n|\r)/gm, "").trim();
-      endpoint.body = newValue;
+    endpoint.body = value;
+    const contentTypes = {
+      None: "",
+      Text: "text/plain",
+      JSON: "application/json",
+      JavaScript: "application/javascript",
+      HTML: "text/html",
+      XML: "application/xml",
     };
+    endpoint.contentType = contentTypes[contentType];
+  };
 
     return (
       <Col md={12}>
-        <CodeMirror
-          key={"dede"}
-          theme={dracula}
-          height="25vh"
-          extensions={
-            value === "JSON"
-              ? [json()]
-              : value === "JavaScript"
-              ? [javascript()]
-              : value === "HTML"
-              ? [html()]
-              : [xml()]
-          }
-          onChange={handleChange}
-        />
+        {contentType === "None" ? (
+          <p className="text-secondary text-center pt-5">
+            This Request Doesn't have any body
+          </p>
+        ) : (
+          <CodeMirror
+            theme={dracula}
+            height="25vh"
+            extensions={
+              contentType === "JSON"
+                ? [json()]
+                : contentType === "JavaScript"
+                ? [javascript()]
+                : contentType === "HTML"
+                ? [html()]
+                : contentType === "XML"
+                ? [xml()]
+                : []
+            }
+            onChange={handleChange}
+          />
+        )}
       </Col>
     );
   }
 
-  function handleDropDownValue(event) {
-    setValue(event.target.textContent);
-  }
+  const handleDropDownValue = (event) => {
+    const textInput = event.target.textContent;
+    setcontentType(textInput);
+    const contentTypes = {
+      None: { body: "", contentType: "" },
+      Text: { contentType: "text/plain" },
+      JSON: { contentType: "application/json" },
+      JavaScript: { contentType: "application/javascript" },
+      HTML: { contentType: "text/html" },
+      XML: { contentType: "application/xml" },
+    };
+    setEndpoint({ ...endpoint, ...contentTypes[textInput] });
+  };
 
   return (
     <div className="px-4 parameter-area">
@@ -176,9 +200,13 @@ function Body({ setEndpoint, endpoint }) {
               className="custom-dropdown-toggle"
               style={{ fontSize: "1rem", padding: "0" }}
             >
-              {value}
+              {contentType}
             </Dropdown.Toggle>
             <Dropdown.Menu variant="dark">
+              <Dropdown.Item onClick={handleDropDownValue}>None</Dropdown.Item>
+              <Dropdown.Divider
+                style={{ backgroundColor: "grey" }}
+              ></Dropdown.Divider>
               <Dropdown.Item onClick={handleDropDownValue}>Text</Dropdown.Item>
               <Dropdown.Item onClick={handleDropDownValue}>JSON</Dropdown.Item>
               <Dropdown.Divider

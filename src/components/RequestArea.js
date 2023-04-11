@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Dropdown } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 
-function RequestArea({ endpoint, setEndpoint, makeApiCall }) {
+function RequestArea({ endpoint, setEndpoint }) {
 
   const handleRequestType = (e) => {
     setEndpoint({ ...endpoint, method: e.target.innerText });
@@ -40,7 +40,7 @@ function RequestArea({ endpoint, setEndpoint, makeApiCall }) {
             color: "#fafafa",
           }}
         />
-        <Button className="btn-dropdown-request rounded-0" onClick={(x)=>console.log(endpoint.body)}>
+        <Button className="btn-dropdown-request rounded-0" onClick={(x)=>console.log(endpoint)}>
           Send
         </Button>
       </div>
