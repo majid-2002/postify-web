@@ -11,7 +11,7 @@ function RequestArea({ endpoint, setEndpoint }) {
 
   const handleSubmitRequest = async () => {
     const response = await makeApiCall(endpoint);
-    console.log(response);
+    console.log(response.data);
   }
 
 
