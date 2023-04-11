@@ -135,7 +135,7 @@ function Body({ setEndpoint, endpoint }) {
     const handleChange = (value) => {
     endpoint.body = value;
     const contentTypes = {
-      None: null,
+      None: {},
       Text: "text/plain",
       JSON: "application/json",
       JavaScript: "application/javascript",
@@ -177,7 +177,7 @@ function Body({ setEndpoint, endpoint }) {
     const textInput = event.target.textContent;
     setcontentType(textInput);
     const contentTypes = {
-      None: { body: null, contentType: "" },
+      None: { body: {}, contentType: "" },
       Text: { contentType: "text/plain" },
       JSON: { contentType: "application/json" },
       JavaScript: { contentType: "application/javascript" },

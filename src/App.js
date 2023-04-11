@@ -12,7 +12,7 @@ function App() {
     "method": "GET",
     "headers": "",
     "params": "",
-    "body": null,
+    "body": {},
     "contentType": ""
   });
 
