@@ -40,7 +40,7 @@ function RequestArea({ endpoint, setEndpoint, makeApiCall }) {
             color: "#fafafa",
           }}
         />
-        <Button className="btn-dropdown-request rounded-0">
+        <Button className="btn-dropdown-request rounded-0" onClick={(x)=>console.log(endpoint.body)}>
           Send
         </Button>
       </div>

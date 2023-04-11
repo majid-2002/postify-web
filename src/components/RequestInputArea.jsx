@@ -128,23 +128,20 @@ function Parameters({ endpoint, setEndpoint }) {
 }
 
 // Body Component
-function Body({setEndpoint,  endpoint}) {
+function Body({ setEndpoint, endpoint }) {
   const [value, setValue] = useState("JSON");
 
   function TextFormat() {
-
-
-
     // I want to pass the value to setEndpoint({ ...endpoint, body: newValue }) but it is not working. help ME !!
     const handleChange = (value) => {
       let newValue = value.replace(/(\r\n|\n|\r)/gm, "").trim();
-    }
-
-
+      endpoint.body = newValue;
+    };
 
     return (
       <Col md={12}>
         <CodeMirror
+          key={"dede"}
           theme={dracula}
           height="25vh"
           extensions={
