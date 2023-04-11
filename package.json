@@ -20,6 +20,7 @@
     "cors": "^2.8.5",
     "feather-icons-react": "^0.6.2",
     "postcss-cli": "^10.1.0",
+    "prettier": "^2.8.7",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",

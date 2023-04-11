@@ -1,9 +1,10 @@
 import React from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { dracula } from "@uiw/codemirror-theme-dracula";
+import { html } from "@codemirror/lang-html";
 import { Col, Row } from "react-bootstrap";
 
-export default function ResponseArea() {
+export default function ResponseArea({responseData}) {
   return (
     <div className="response-area px-3">
       <Row className="result-container pt-2 w-25">
@@ -22,10 +23,11 @@ export default function ResponseArea() {
       </Row>
       <Row>
         <CodeMirror
-          value="Your response goes here."
+          value={responseData}
           readOnly={true}
           placeholder={"Your response goes here."}
           theme={dracula}
+          extensions={[html()]}
           height="40vh"
         />
       </Row>

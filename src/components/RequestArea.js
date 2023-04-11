@@ -1,19 +1,12 @@
 import React from "react";
 import { Button, Dropdown } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import { makeApiCall } from "./functions/makeApiCall";
 
-function RequestArea({ endpoint, setEndpoint }) {
+function RequestArea({ endpoint, setEndpoint , handleSubmit}) {
 
   const handleRequestType = (e) => {
     setEndpoint({ ...endpoint, method: e.target.innerText });
   };
-
-  const handleSubmitRequest = async () => {
-    const response = await makeApiCall(endpoint);
-    console.log(response.data);
-  }
-
 
 
 
@@ -46,7 +39,9 @@ function RequestArea({ endpoint, setEndpoint }) {
             color: "#fafafa",
           }}
         />
-        <Button className="btn-dropdown-request rounded-0" onClick={handleSubmitRequest}>
+        <Button className="btn-dropdown-request rounded-0" onClick={()=>{
+          handleSubmit();
+        }}>
           Send
         </Button>
       </div>
