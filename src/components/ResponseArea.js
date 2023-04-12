@@ -10,28 +10,27 @@ import Button from "@mui/joy/Button";
 import CircularProgress from "@mui/joy/CircularProgress";
 
 export default function ResponseArea({ responseData, Loading }) {
-  const contentType = responseData.lang_type;
-  const status = responseData.status;
-  const time = responseData.time;
-  const size = responseData.size;
+  const { data, lang_type: contentType, status, time, size } = responseData;
 
-  let customStyle = {
-    color: "",
+  const customStyle = {
+    color:
+      status >= 200 && status < 300
+        ? "#39cc18"
+        : status >= 300 && status < 400
+        ? "#FD7E14"
+        : status >= 400 && status < 500
+        ? "#DC3545"
+        : "#343A40",
   };
 
-  if (status >= 200 && status < 300) {
-    customStyle.color = "#39cc18";
-  } else if (status >= 300 && status < 400) {
-    customStyle.color = "#FD7E14";
-  } else if (status >= 400 && status < 500) {
-    customStyle.color = "#DC3545";
-  } else if (status >= 500 && status < 600) {
-    customStyle.color = "#343A40";
-  }
+  const statusLabel = { value: "Status", style: customStyle };
+  const timeLabel = { value: "Time", style: { color: "#0d6efd" } };
+  const sizeLabel = { value: "Size", style: { color: "#0d6efd" } };
+  const labels = [statusLabel, timeLabel, sizeLabel];
 
   return (
     <div>
-      {responseData.data === "" ? (
+      {data === "" ? (
         <div className="response-area text-secondary text-center pt-5">
           <p>Send a request</p>
         </div>
@@ -50,22 +49,22 @@ export default function ResponseArea({ responseData, Loading }) {
           ) : (
             <>
               <Row className="result-container pt-2 w-25">
-                <Col md={4}>
-                  <h4 style={customStyle}>Status</h4>
-                  <p style={customStyle}>{status}</p>
-                </Col>
-                <Col md={4}>
-                  <h4 className="custom-color-blue">Time</h4>
-                  <p className="custom-color-blue">{time} ms</p>
-                </Col>
-                <Col md={4}>
-                  <h4 className="custom-color-blue">Size</h4>
-                  <p className="custom-color-blue">{size} KB</p>
-                </Col>
+                {labels.map(({ value, style }, index) => (
+                  <Col md={4} key={index}>
+                    <h4 style={style}>{value}</h4>
+                    <p style={style}>
+                      {index === 0
+                        ? status
+                        : index === 1
+                        ? `${time} ms`
+                        : `${size} KB`}
+                    </p>
+                  </Col>
+                ))}
               </Row>
               <Row>
                 <CodeMirror
-                  value={responseData.data}
+                  value={data}
                   readOnly={true}
                   placeholder={"Your response goes here."}
                   theme={dracula}
