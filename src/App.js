@@ -9,62 +9,34 @@ import prettier from "prettier/standalone";
 import parserHtml from "prettier/parser-html";
 
 function App() {
+
   const [responseData, setResponseData] = useState({
     data: "",
     lang_type: "",
   });
-
   const handleSubmitRequest = async () => {
     const response = await makeApiCall(endpoint);
     const contentType = response.headers["content-type"];
-    console.log(contentType);
     let stringValue;
-
+  
     if (contentType.includes("json")) {
       stringValue = JSON.stringify(response.data, null, 2);
-      setResponseData({
-        ...responseData,
-        data : stringValue,
-        lang_type: "json",
-      });
     } else if (contentType.includes("html")) {
-      stringValue = prettier.format(response.data, {
-        parser: "html",
-        plugins: [parserHtml],
-      });
-      setResponseData({
-        ...responseData,
-        data : stringValue,
-        lang_type: "html",
-      });
+      stringValue = prettier.format(response.data, { parser: "html", plugins: [parserHtml] });
     } else if (contentType.includes("xml")) {
       stringValue = prettier.format(response.data, { parser: "xml" });
-      setResponseData({
-        ...responseData,
-        data : stringValue,
-        lang_type: "xml",
-      });
     } else if (contentType.includes("javascript")) {
       stringValue = prettier.format(response.data, { parser: "babel" });
-      setResponseData({
-        ...responseData,
-        data : stringValue,
-        lang_type: "javascript",
-      });
     } else {
       stringValue = prettier.format(response.data, { parser: "text" });
-      setResponseData({
-        ...responseData,
-        data : stringValue,
-        lang_type: "text",
-      });
     }
-
-    
+  
+    setResponseData({
+      data: stringValue,
+      lang_type: contentType.split(";")[0].split("/")[1], //? "json" or "html" or "xml" or "javascript" or "plain"
+    });
   };
-
-
-
+  
 
 
   const [endpoint, setEndpoint] = React.useState({

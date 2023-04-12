@@ -9,6 +9,7 @@ import { xml } from "@codemirror/lang-xml";
 
 export default function ResponseArea({responseData}) {
 
+  console.log(responseData)
   const contentType = responseData.lang_type;
 
   return (
