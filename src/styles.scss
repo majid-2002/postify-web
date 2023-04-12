@@ -77,7 +77,9 @@ body {
     background-color: #212224;
     overflow-y: scroll;
 
-
+    .cm-scroller::-webkit-scrollbar{
+      display: none;
+    }
     .cm-editor, .cm-gutters{
       background-color: transparent;
       border: 1px solid #30363d;
@@ -146,7 +148,7 @@ body {
     float: right;
     border-top: 1px silver inset;
 
-    div.cm-scroller::-webkit-scrollbar{
+    .cm-scroller::-webkit-scrollbar{
       display: none;
     }
 
@@ -162,10 +164,16 @@ body {
     }
 
     .result-container{
-      h4, p{
-        color: #fafafa;
+      h4{
         font-size: 1rem;
         text-align: center;
+      }
+      p{
+        text-align: center;
+        font-weight: bold;
+      }
+      .custom-color-blue{
+        color: #0d6efd;
       }
 
       

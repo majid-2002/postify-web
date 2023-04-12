@@ -13,13 +13,20 @@ function App() {
   const [responseData, setResponseData] = useState({
     data: "",
     lang_type: "",
+    status : 200,
+    size : null,
+    time : null,
   });
-  
+
   const handleSubmitRequest = async () => {
+    const startTime = Date.now();
     const response = await makeApiCall(endpoint);
-    const contentType = response.headers["content-type"];
-    let stringValue;
+    const endTime = Date.now();
   
+    const contentType = response.headers["content-type"];
+    const responseSize =(new TextEncoder().encode(JSON.stringify(response.data)).length / 1024).toFixed(2);
+
+    let stringValue;
     if (contentType.includes("json")) {
       stringValue = JSON.stringify(response.data, null, 2);
     } else if (contentType.includes("html")) {
@@ -35,6 +42,9 @@ function App() {
     setResponseData({
       data: stringValue,
       lang_type: contentType.split(";")[0].split("/")[1], //? "json" or "html" or "xml" or "javascript" or "plain"
+      status: response.status,
+      time: endTime - startTime, // time taken to receive response in milliseconds
+      size: responseSize, // size of the response in bytes
     });
   };
   
