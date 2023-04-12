@@ -14,6 +14,7 @@ function App() {
     data: "",
     lang_type: "",
   });
+  
   const handleSubmitRequest = async () => {
     const response = await makeApiCall(endpoint);
     const contentType = response.headers["content-type"];

@@ -7,9 +7,7 @@ import { json } from "@codemirror/lang-json";
 import { javascript } from "@codemirror/lang-javascript";
 import { xml } from "@codemirror/lang-xml";
 
-export default function ResponseArea({responseData}) {
-
-  console.log(responseData)
+export default function ResponseArea({ responseData }) {
   const contentType = responseData.lang_type;
 
   return (
@@ -29,13 +27,13 @@ export default function ResponseArea({responseData}) {
         </Col>
       </Row>
       <Row>
-        <CodeMirror
-          value={responseData.data}
-          readOnly={true}
-          placeholder={"Your response goes here."}
-          theme={dracula}
-          height="40vh"
-          extensions={
+          <CodeMirror
+            value={responseData.data}
+            readOnly={true}
+            placeholder={"Your response goes here."}
+            theme={dracula}
+            height="40vh"
+            extensions={
               contentType === "json"
                 ? [json()]
                 : contentType === "javascript"
@@ -46,7 +44,7 @@ export default function ResponseArea({responseData}) {
                 ? [xml()]
                 : []
             }
-        />
+          />
       </Row>
     </div>
   );

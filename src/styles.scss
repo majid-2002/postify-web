@@ -146,6 +146,9 @@ body {
     float: right;
     border-top: 1px silver inset;
 
+    div.cm-scroller::-webkit-scrollbar{
+      display: none;
+    }
 
     .cm-editor, .cm-gutters{
       background-color: transparent;
