@@ -11,9 +11,7 @@ export const makeApiCall = async (endpoint) => {
       "Content-Type": endpoint.contentType,
     },
     params: { ...endpoint.params },
-    data: {
-      ...endpoint.body,
-    },
+    data: JSON.parse(endpoint.body) ?? {},
   };
   
   try {

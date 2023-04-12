@@ -14,9 +14,6 @@ function RequestArea({ endpoint, setEndpoint }) {
     console.log(response.data);
   }
 
-
-
-
   return (
     <div className="request-area">
       <div className="d-flex justify-content-center px-4">
