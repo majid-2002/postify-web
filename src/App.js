@@ -18,10 +18,15 @@ function App() {
     time : null,
   });
 
+  const [Loading , setLoading] = useState(false);
+
+
   const handleSubmitRequest = async () => {
+    setLoading(true);
     const startTime = Date.now();
     const response = await makeApiCall(endpoint);
     const endTime = Date.now();
+    setLoading(false);
   
     const contentType = response.headers["content-type"];
     const responseSize =(new TextEncoder().encode(JSON.stringify(response.data)).length / 1024).toFixed(2);
@@ -69,7 +74,7 @@ function App() {
       />
       <History />
       <RequestInputArea endpoint={endpoint} setEndpoint={setEndpoint} />
-      <ResponseArea responseData={responseData} />
+      <ResponseArea responseData={responseData} Loading={Loading}/>
     </div>
   );
 }
