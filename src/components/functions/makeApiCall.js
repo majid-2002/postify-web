@@ -11,7 +11,7 @@ export const makeApiCall = async (endpoint) => {
       "Content-Type": endpoint.contentType,
     },
     params: { ...endpoint.params },
-    data: JSON.parse(endpoint.body) ?? {},
+    data: endpoint.contentType === "application/json" ? JSON.parse(endpoint.body) : endpoint.body,
   };
   
   try {
@@ -21,3 +21,4 @@ export const makeApiCall = async (endpoint) => {
     throw error;
   }
 };
+

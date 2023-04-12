@@ -133,17 +133,21 @@ function Body({ setEndpoint, endpoint }) {
 
   function TextFormat() {
     const handleChange = (value) => {
-    endpoint.body = value;
-    const contentTypes = {
-      None: {},
-      Text: "text/plain",
-      JSON: "application/json",
-      JavaScript: "application/javascript",
-      HTML: "text/html",
-      XML: "application/xml",
+      endpoint.body = value;
+      const contentTypes = {
+        None: {},
+        Text: "text/plain",
+        JSON: "application/json",
+        JavaScript: "application/javascript",
+        HTML: "text/html",
+        XML: "application/xml",
+      };
+      endpoint.contentType = contentTypes[contentType];
+      if (endpoint.contentType === "application/json") {
+        endpoint.body = JSON.stringify(endpoint.body);
+      }
     };
-    endpoint.contentType = contentTypes[contentType];
-  };
+    
 
     return (
       <Col md={12}>
