@@ -17,7 +17,7 @@ export default function ResponseArea({ responseData, Loading }) {
       status >= 200 && status < 300
         ? "#31cd64"
         : status >= 300 && status < 400
-        ? "#33a7ff"
+        ? "#fda92a"
         : status >= 400 && status < 500
         ? "#fda92a"
         : "#fc4f52",
