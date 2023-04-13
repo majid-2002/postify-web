@@ -7,6 +7,9 @@ import { json } from "@codemirror/lang-json";
 import { javascript } from "@codemirror/lang-javascript";
 import { xml } from "@codemirror/lang-xml";
 import { html } from "@codemirror/lang-html";
+import JSON5 from 'json5'
+
+
 
 function RequestInputArea({ endpoint, setEndpoint }) {
   const [showComponentItem, setshowComponentItem] = useState("parameter");
@@ -133,9 +136,8 @@ function Body({ setEndpoint, endpoint }) {
 
   function TextFormat() {
     const handleChange = (value) => {
-      endpoint.body = value;
       const contentTypes = {
-        None: {},
+        None: "",
         Text: "text/plain",
         JSON: "application/json",
         JavaScript: "application/javascript",
@@ -143,11 +145,16 @@ function Body({ setEndpoint, endpoint }) {
         XML: "application/xml",
       };
       endpoint.contentType = contentTypes[contentType];
-      if (endpoint.contentType === "application/json") {
-        endpoint.body = JSON.stringify(endpoint.body);
+      try {
+        endpoint.body = endpoint.contentType === "application/json" ? JSON5.parse(value) : value;
+      } catch (e) {
+        console.error("Error parsing JSON: ", e);
+        // handle the error appropriately, e.g. by setting endpoint.body to an empty object
+        endpoint.body = {};
       }
+      console.log(endpoint.contentType)
     };
-    
+
 
     return (
       <Col md={12}>
@@ -157,6 +164,7 @@ function Body({ setEndpoint, endpoint }) {
           </p>
         ) : (
           <CodeMirror
+            value={endpoint.contentType === "application/json" ? JSON.stringify(endpoint.body, null, 2) : endpoint.body}
             theme={dracula}
             height="25vh"
             extensions={
@@ -181,7 +189,7 @@ function Body({ setEndpoint, endpoint }) {
     const textInput = event.target.textContent;
     setcontentType(textInput);
     const contentTypes = {
-      None: { body: {}, contentType: "" },
+      None: { body: "", contentType: "" },
       Text: { contentType: "text/plain" },
       JSON: { contentType: "application/json" },
       JavaScript: { contentType: "application/javascript" },
