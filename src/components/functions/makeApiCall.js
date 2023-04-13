@@ -1,19 +1,23 @@
 import axios from "axios";
 
-
 export const makeApiCall = async (endpoint) => {
-
   const config = {
     method: endpoint.method,
-    url: endpoint.url,
+    url: /^https?:\/\//i.test(endpoint.url)
+      ? endpoint.url
+      : `http://${endpoint.url}`,
+
     headers: {
       ...endpoint.headers,
       "Content-Type": endpoint.contentType,
     },
     params: { ...endpoint.params },
-    data: endpoint.contentType === "application/json" ? JSON.parse(endpoint.body) : endpoint.body,
+    data:
+      endpoint.contentType === "application/json"
+        ? JSON.parse(endpoint.body)
+        : endpoint.body,
   };
-  
+
   try {
     const response = await axios(config);
     return response;
@@ -21,4 +25,3 @@ export const makeApiCall = async (endpoint) => {
     throw error;
   }
 };
-
