@@ -213,13 +213,31 @@ body {
         overflow: hidden;
         border: 1px solid #30363d;
 
-        h3 {
+        .get-method {
           color: green;
-          text-align: center;
         }
-        span:nth-child(1) {
-          margin-inline-end: 0.4em;
+        
+        .post-method {
+          color: blue;
         }
+        
+        .put-method {
+          color: orange;
+        }
+        
+        .patch-method {
+          color: purple;
+        }
+        
+        .delete-method {
+          color: red;
+        }
+        
+        .head-method {
+          color: black;
+        }
+        
+
         p:first-child {
           color: #fafafa;
         }
@@ -227,6 +245,10 @@ body {
           color: #838383;
           word-spacing: 0.2em;
         }
+
+        
+
+
       }
     }
   }

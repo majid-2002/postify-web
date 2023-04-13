@@ -28,6 +28,10 @@ function App() {
 
   const [Loading, setLoading] = useState(false);
 
+  const [localStorageEndpoints, setlocalStorageEndpoint] = useState(
+    JSON.parse(localStorage.getItem("endpoints")) || []
+  );
+
   const handleSubmitRequest = async () => {
     setLoading(true);
     let startTime = null;
@@ -68,13 +72,25 @@ function App() {
         size: responseSize, // size of the response in bytes
       });
 
-      const endpointList = JSON.parse(localStorage.getItem("endpoints")) || [];
-      const exists = endpointList.some(
+      const exists = localStorageEndpoints.some(
         (e) => e.url === endpoint.url && e.method === endpoint.method
       );
+
       if (!exists) {
-        endpointList.push(endpoint);
-        localStorage.setItem("endpoints", JSON.stringify(endpointList));
+        const dateAndTime = new Date().toLocaleString("en-US", {
+          hour12: false,
+          hour: "numeric",
+          minute: "numeric",
+          day: "numeric",
+          month: "numeric",
+          year: "numeric",
+        });
+        const newEndpoint = { ...endpoint, dateAndTime };
+        setlocalStorageEndpoint([...localStorageEndpoints, newEndpoint]);
+        localStorage.setItem(
+          "localStorageEndpoints",
+          JSON.stringify([...localStorageEndpoints, newEndpoint])
+        );
       }
     } catch (error) {
       const { response } = error;
@@ -133,7 +149,7 @@ function App() {
         setEndpoint={setEndpoint}
         handleSubmit={handleSubmitRequest}
       />
-      <History />
+      <History localStorageEndpoints={localStorageEndpoints} />
       <RequestInputArea endpoint={endpoint} setEndpoint={setEndpoint} />
       <ResponseArea responseData={responseData} Loading={Loading} />
     </div>
