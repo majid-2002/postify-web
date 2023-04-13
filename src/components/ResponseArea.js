@@ -15,12 +15,12 @@ export default function ResponseArea({ responseData, Loading }) {
   const customStyle = {
     color:
       status >= 200 && status < 300
-        ? "#39cc18"
+        ? "#31cd64"
         : status >= 300 && status < 400
-        ? "#FD7E14"
+        ? "#33a7ff"
         : status >= 400 && status < 500
-        ? "#DC3545"
-        : "#343A40",
+        ? "#fda92a"
+        : "#fc4f52",
   };
 
   const statusLabel = { value: "Status", style: customStyle };
@@ -57,7 +57,7 @@ export default function ResponseArea({ responseData, Loading }) {
                         ? status
                         : index === 1
                         ? `${time} ms`
-                        : `${size} KB`}
+                        : status >= 400 || status === "Error" ? `${size} B` : `${size} KB`}
                     </p>
                   </Col>
                 ))}

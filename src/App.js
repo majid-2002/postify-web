@@ -38,7 +38,8 @@ function App() {
       const response = await makeApiCall(endpoint);
       endTime = Date.now();
 
-      const contentType = response.headers["content-type"];
+      const contentType = response.headers["content-type"] || "unknown";
+
       responseSize = (
         new TextEncoder().encode(JSON.stringify(response.data)).length / 1024
       ).toFixed(2);
@@ -56,7 +57,7 @@ function App() {
       } else if (contentType.includes("javascript")) {
         stringValue = prettier.format(response.data, { parser: "babel" });
       } else {
-        stringValue = prettier.format(response.data, { parser: "text" });
+        stringValue = response.data || response.statusText;
       }
 
       setResponseData({
@@ -76,8 +77,44 @@ function App() {
         localStorage.setItem("endpoints", JSON.stringify(endpointList));
       }
     } catch (error) {
+      const { response } = error;
+
+      let statusCode, errorType, errorMessage;
+
+      if (response) {
+        // Handle API errors
+        statusCode = response.status;
+        if (statusCode >= 400) {
+          errorType = response.data?.error || "Unknown error";
+        }
+        errorMessage =
+          response.data?.message ||
+          response.statusText ||
+          "An error occurred while processing the request.";
+      } else if (error.request) {
+        // Handle network errors
+        statusCode = "Network Error";
+        errorType = "Network error";
+        errorMessage = "Unable to connect to the server.";
+      } else {
+        // Handle other errors
+        statusCode = "Error";
+        errorType = error.name || "Unknown error";
+        errorMessage = error.message || "An error occurred.";
+      }
+
+      const errorResponseData = {
+        statusCode,
+        error: errorType,
+        message: errorMessage,
+      };
+
+      responseSize = new TextEncoder().encode(
+        JSON.stringify(errorResponseData)
+      ).length;
+
       setResponseData({
-        data: JSON.stringify(error, null, 2),
+        data: JSON.stringify(errorResponseData, null, 2),
         lang_type: "json",
         status: error.response?.status || "Error",
         time: Date.now() - startTime,
