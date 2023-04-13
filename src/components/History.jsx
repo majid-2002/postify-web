@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col } from "react-bootstrap";
 
 function HistoryCard({ method, url, datetime }) {
-  const shortenedUrl = url.length > 36 ? url.substr(0, 36) + "..." : url;
+  const shortenedUrl = url.length > 30 ? url.substr(0, 30) + "..." : url;
 
   const methodClassName = `fs-5 ${method.toLowerCase()}-method`;
 
   return (
     <div className="history-card rounded-2">
-      <Row>
-        <Col className="d-flex align-items-center">
+      <div className="row-cols-2 d-flex align-items-center">
+        <div style={{width : "70px"}} className="text-center">
           <h3 className={methodClassName}>{method}</h3>
-        </Col>
-        <Col className="pt-2">
+        </div>
+        <div className="p-2" style={{width : "250px"}}>
           <p>{shortenedUrl}</p>
           <p>
             <span>{datetime}</span>
           </p>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   );
 }
