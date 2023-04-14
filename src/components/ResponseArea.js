@@ -1,6 +1,5 @@
 import React from "react";
 import CodeMirror from "@uiw/react-codemirror";
-import { dracula } from "@uiw/codemirror-theme-dracula";
 import { html } from "@codemirror/lang-html";
 import { Col, Row } from "react-bootstrap";
 import { json } from "@codemirror/lang-json";
@@ -8,6 +7,9 @@ import { javascript } from "@codemirror/lang-javascript";
 import { xml } from "@codemirror/lang-xml";
 import Button from "@mui/joy/Button";
 import CircularProgress from "@mui/joy/CircularProgress";
+import { dracula } from "@uiw/codemirror-theme-dracula";
+
+
 
 export default function ResponseArea({ responseData, Loading }) {
   const { data, lang_type: contentType, status, time, size } = responseData;

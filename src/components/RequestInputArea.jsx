@@ -141,7 +141,6 @@ function Parameters({ endpoint, setEndpoint, parameter, setParameter }) {
   );
 }
 
-
 // Body Component
 function Body({ setEndpoint, endpoint }) {
   const [contentType, setcontentType] = useState("JSON");
@@ -248,7 +247,6 @@ function Body({ setEndpoint, endpoint }) {
   );
 }
 
-
 // Headers Component
 function Headers({ endpoint, setEndpoint, setHeader, header }) {
   const handleInputChange = (e, index) => {
@@ -327,6 +325,5 @@ function Headers({ endpoint, setEndpoint, setHeader, header }) {
     </div>
   );
 }
-
 
 export default RequestInputArea;
