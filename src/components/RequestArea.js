@@ -25,16 +25,13 @@ function RequestArea({ endpoint, setEndpoint , handleSubmit}) {
           </Dropdown.Menu>
         </Dropdown>
         <Form.Control
+          value={endpoint.url}
           onChange={(e) => setEndpoint({ ...endpoint, url: e.target.value })}
           placeholder="Enter request URL"
           type="text"
-          className="bg-dark border-info border-opacity-75 rounded-0"
+          className="bg-dark border-info border-opacity-75 rounded-0 me-4 text-light"
           style={{
-            paddingInline: "1em",
-            marginRight: "1.6em",
             borderRadius: "0 6px 6px 0",
-            outline: "none",
-            color: "#fafafa",
           }}
         />
         <Button className="btn-dropdown-request rounded-0" onClick={()=>{
