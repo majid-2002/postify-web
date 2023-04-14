@@ -9,11 +9,13 @@ import prettier from "prettier/standalone";
 import parserHtml from "prettier/parser-html";
 
 function App() {
+
+
   const [endpoint, setEndpoint] = React.useState({
     url: "",
     method: "GET",
-    headers: "",
-    params: "",
+    headers: {},
+    params: {},
     body: "",
     contentType: "",
   });

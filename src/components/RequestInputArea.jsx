@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Row, Col, Form, Dropdown, Button } from "react-bootstrap";
 import FeatherIcon from "feather-icons-react";
 import CodeMirror from "@uiw/react-codemirror";
@@ -10,6 +10,8 @@ import { html } from "@codemirror/lang-html";
 
 function RequestInputArea({ endpoint, setEndpoint }) {
   const [showComponentItem, setshowComponentItem] = useState("parameter");
+  const [parameter, setParameter] = useState([{ key: "", value: "" }]);
+  const [header, setHeader] = useState([{ key: "", value: "" }]);
 
   return (
     <div className="request-input-area">
@@ -40,66 +42,78 @@ function RequestInputArea({ endpoint, setEndpoint }) {
         </li>
       </ul>
       {showComponentItem === "parameter" ? (
-        <Parameters endpoint={endpoint} setEndpoint={setEndpoint} />
+        <Parameters
+          endpoint={endpoint}
+          setEndpoint={setEndpoint}
+          parameter={parameter}
+          setParameter={setParameter}
+        />
       ) : showComponentItem === "body" ? (
         <Body endpoint={endpoint} setEndpoint={setEndpoint} />
       ) : (
-        <Headers endpoint={endpoint} setEndpoint={setEndpoint} />
+        <Headers
+          endpoint={endpoint}
+          setEndpoint={setEndpoint}
+          header={header}
+          setHeader={setHeader}
+        />
       )}
     </div>
   );
 }
 
-function Parameters({ endpoint, setEndpoint }) {
-  const [paramRows, setParamRows] = useState([{ param: "", value: "" }]);
-
-  useEffect(() => {
-    const urlParameters = {};
-    paramRows.forEach(({ param, value }) => {
-      if (param.trim() !== "" && value.trim() !== "") {
-        urlParameters[param.trim()] = value.trim();
+// Parameters Component
+function Parameters({ endpoint, setEndpoint, parameter, setParameter }) {
+  const handleInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...parameter];
+    list[index][name] = value;
+    setParameter(list);
+    const params = list.reduce((acc, item) => {
+      if (item.key !== "" && item.value !== "") {
+        acc[item.key] = item.value;
       }
-      setEndpoint({ ...endpoint, params: urlParameters });
-    });
-    // eslint-disable-next-line
-  }, [paramRows]);
-
-  const handleInputChange = (index, key) => (event) => {
-    const newParamRows = [...paramRows];
-    newParamRows[index][key] = event.target.value;
-    setParamRows(newParamRows);
-    if (index === paramRows.length - 1 && event.target.value !== "") {
-      setParamRows([...newParamRows, { param: "", value: "" }]);
+      return acc;
+    }, {});
+    setEndpoint({ ...endpoint, params });
+    if (list[list.length - 1].key !== "") {
+      setParameter([...list, { key: "", value: "" }]);
     }
   };
 
-  const handleDeleteRow = (index) => {
-    const newParamRows = [...paramRows];
-    newParamRows.splice(index, 1);
-    setParamRows(newParamRows);
+  const handleAddClick = () => {
+    setParameter([...parameter, { key: "", value: "" }]);
+  };
+
+  const handleRemoveClick = (index) => {
+    const list = [...parameter];
+    list.splice(index, 1);
+    setParameter(list);
   };
 
   return (
     <div className="px-4 parameter-area">
       <p>Query Parameters</p>
-      {paramRows.map((row, index) => (
+      {parameter.map((param, index) => (
         <Row className="g-2 my-1" key={index}>
           <Col md={6}>
             <Form.Control
+              value={param.key}
+              name="key"
               type="text"
               placeholder={`Parameter ${index + 1}`}
               className="bg-dark text-white border-primary border-opacity-75 rounded-0 form-control-sm"
-              value={row.param}
-              onChange={handleInputChange(index, "param")}
+              onChange={(e) => handleInputChange(e, index)}
             />
           </Col>
           <Col md={5}>
             <Form.Control
+              value={param.value}
+              name="value"
               type="text"
               placeholder={`Value ${index + 1}`}
               className="bg-dark text-white border-primary border-opacity-75 rounded-0 form-control-sm"
-              value={row.value}
-              onChange={handleInputChange(index, "value")}
+              onChange={(e) => handleInputChange(e, index)}
             />
           </Col>
           <Col md={1}>
@@ -107,16 +121,16 @@ function Parameters({ endpoint, setEndpoint }) {
               icon="delete"
               size="2.3em"
               className="request-icons"
-              onClick={() => handleDeleteRow(index)}
+              onClick={() => handleRemoveClick(index)}
             />
           </Col>
         </Row>
       ))}
-      {paramRows.length === 0 && (
+      {parameter.length === 0 && (
         <div className="d-flex align-items-center justify-content-center btn-group-sm btn-parameter-container">
           <Button
             className="btn btn-outline-info btn-dark d-block"
-            onClick={() => setParamRows([{ param: "", value: "" }])}
+            onClick={handleAddClick}
           >
             <FeatherIcon icon="plus" size="1.4em" />
             Add Parameter
@@ -126,6 +140,7 @@ function Parameters({ endpoint, setEndpoint }) {
     </div>
   );
 }
+
 
 // Body Component
 function Body({ setEndpoint, endpoint }) {
@@ -153,7 +168,11 @@ function Body({ setEndpoint, endpoint }) {
           </p>
         ) : (
           <CodeMirror
-            value={endpoint.contentType === "application/json" ? JSON.parse(JSON.stringify(endpoint.body, null, 2)): endpoint.body}
+            value={
+              endpoint.contentType === "application/json"
+                ? JSON.parse(JSON.stringify(endpoint.body, null, 2))
+                : endpoint.body
+            }
             theme={dracula}
             height="25vh"
             extensions={
@@ -229,59 +248,59 @@ function Body({ setEndpoint, endpoint }) {
   );
 }
 
-function Headers({ endpoint, setEndpoint }) {
-  const [headerRows, setHeaderRows] = useState([{ header: "", value: "" }]);
 
-  useEffect(() => {
-    const urlHeaders = {};
-    headerRows.forEach(({ header, value }) => {
-      if (header.trim() !== "" && value.trim() !== "") {
-        urlHeaders[header.trim()] = value.trim();
+// Headers Component
+function Headers({ endpoint, setEndpoint, setHeader, header }) {
+  const handleInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...header];
+    list[index][name] = value;
+    setHeader(list);
+    const headers = list.reduce((acc, item) => {
+      if (item.key && item.value) {
+        acc[item.key] = item.value;
       }
-      setEndpoint({ ...endpoint, headers: urlHeaders });
-    });
-    // eslint-disable-next-line
-  }, [headerRows]);
-
-  function handleInputChange(index, key, value) {
-    const newHeaderRows = [...headerRows];
-    newHeaderRows[index][key] = value;
-    setHeaderRows(newHeaderRows);
-    if (index === headerRows.length - 1 && value !== "") {
-      setHeaderRows([...newHeaderRows, { header: "", value: "" }]);
+      return acc;
+    }, {});
+    setEndpoint({ ...endpoint, headers });
+    if (list[list.length - 1].key !== "") {
+      setHeader([...list, { key: "", value: "" }]);
     }
-  }
+  };
 
-  function handleDeleteRow(index) {
-    setHeaderRows(headerRows.filter((row, i) => i !== index));
-  }
+  const handleAddClick = () => {
+    setHeader([...header, { key: "", value: "" }]);
+  };
+
+  const handleRemoveClick = (index) => {
+    const list = [...header];
+    list.splice(index, 1);
+    setHeader(list);
+  };
 
   return (
     <div className="px-4 parameter-area">
-      <p>Header List</p>
-
-      {headerRows.map((row, index) => (
+      <p>Query Parameters</p>
+      {header.map((head, index) => (
         <Row className="g-2 my-1" key={index}>
-          <Col md={6} className="">
+          <Col md={6}>
             <Form.Control
+              value={head.key}
+              name="key"
               type="text"
               placeholder={`Header ${index + 1}`}
-              value={row.header}
               className="bg-dark text-white border-primary border-opacity-75 rounded-0 form-control-sm"
-              onChange={(event) =>
-                handleInputChange(index, "header", event.target.value)
-              }
+              onChange={(e) => handleInputChange(e, index)}
             />
           </Col>
           <Col md={5}>
             <Form.Control
+              value={head.value}
+              name="value"
               type="text"
               placeholder={`Value ${index + 1}`}
               className="bg-dark text-white border-primary border-opacity-75 rounded-0 form-control-sm"
-              value={row.value}
-              onChange={(event) =>
-                handleInputChange(index, "value", event.target.value)
-              }
+              onChange={(e) => handleInputChange(e, index)}
             />
           </Col>
           <Col md={1}>
@@ -289,16 +308,16 @@ function Headers({ endpoint, setEndpoint }) {
               icon="delete"
               size="2.3em"
               className="request-icons"
-              onClick={() => handleDeleteRow(index)}
+              onClick={() => handleRemoveClick(index)}
             />
           </Col>
         </Row>
       ))}
-      {headerRows.length === 0 && (
+      {header.length === 0 && (
         <div className="d-flex align-items-center justify-content-center btn-group-sm btn-parameter-container">
           <Button
             className="btn btn-outline-info btn-dark d-block"
-            onClick={() => setHeaderRows([{ param: "", value: "" }])}
+            onClick={handleAddClick}
           >
             <FeatherIcon icon="plus" size="1.4em" />
             Add Header
@@ -308,5 +327,6 @@ function Headers({ endpoint, setEndpoint }) {
     </div>
   );
 }
+
 
 export default RequestInputArea;
