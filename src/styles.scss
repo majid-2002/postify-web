@@ -214,28 +214,29 @@ body {
         border: 1px solid #30363d;
 
         .get-method {
-          color: green;
+          color: #54a7e0; /* blue */
         }
         
         .post-method {
-          color: blue;
+          color: #47d1d1; /* cyan */
         }
         
         .put-method {
-          color: orange;
+          color: #fbb829; /* yellow */
         }
         
         .patch-method {
-          color: purple;
+          color: #a65af7; /* purple */
         }
         
         .delete-method {
-          color: red;
+          color: #ff6b6b; /* red */
         }
         
         .head-method {
-          color: black;
+          color: #b7b7b7; /* gray */
         }
+        
         
 
         p:first-child {
