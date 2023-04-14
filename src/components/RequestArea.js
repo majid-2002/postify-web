@@ -2,26 +2,27 @@ import React from "react";
 import { Button, Dropdown } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 
-function RequestArea({ endpoint, setEndpoint , handleSubmit}) {
-
-  const handleRequestType = (e) => {
-    setEndpoint({ ...endpoint, method: e.target.innerText });
+function RequestArea({ endpoint, setEndpoint, handleSubmit }) {
+  const handleRequestType = (method) => {
+    setEndpoint({ ...endpoint, method });
   };
 
   return (
     <div className="request-area">
       <div className="d-flex justify-content-center px-4">
-        <Dropdown className="">
-          <Dropdown.Toggle className="rounded-0 btn-dropdown-request" >
+        <Dropdown>
+          <Dropdown.Toggle className="rounded-0 btn-dropdown-request">
             {endpoint.method}
           </Dropdown.Toggle>
           <Dropdown.Menu variant="dark">
-            <Dropdown.Item onClick={handleRequestType}>GET</Dropdown.Item>
-            <Dropdown.Item onClick={handleRequestType}>POST</Dropdown.Item>
-            <Dropdown.Item onClick={handleRequestType}>PUT</Dropdown.Item>
-            <Dropdown.Item onClick={handleRequestType}>PATCH</Dropdown.Item>
-            <Dropdown.Item onClick={handleRequestType}>DELETE</Dropdown.Item>
-            <Dropdown.Item onClick={handleRequestType}>HEAD</Dropdown.Item>
+            {["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"].map((method) => (
+              <Dropdown.Item
+                key={method}
+                onClick={() => handleRequestType(method)}
+              >
+                {method}
+              </Dropdown.Item>
+            ))}
           </Dropdown.Menu>
         </Dropdown>
         <Form.Control
@@ -34,9 +35,12 @@ function RequestArea({ endpoint, setEndpoint , handleSubmit}) {
             borderRadius: "0 6px 6px 0",
           }}
         />
-        <Button className="btn-dropdown-request rounded-0" onClick={()=>{
-          handleSubmit();
-        }}>
+        <Button
+          className="btn-dropdown-request rounded-0 border-0 "
+          onClick={() => {
+            handleSubmit();
+          }}
+        >
           Send
         </Button>
       </div>

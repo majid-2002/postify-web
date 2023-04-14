@@ -102,7 +102,7 @@ function Parameters({ endpoint, setEndpoint, parameter, setParameter }) {
               name="key"
               type="text"
               placeholder={`Parameter ${index + 1}`}
-              className="bg-dark text-white border-primary border-opacity-75 rounded-0 form-control-sm"
+              className="bg-dark text-white border-info border-opacity-75 rounded-0 form-control-sm"
               onChange={(e) => handleInputChange(e, index)}
             />
           </Col>
@@ -112,7 +112,7 @@ function Parameters({ endpoint, setEndpoint, parameter, setParameter }) {
               name="value"
               type="text"
               placeholder={`Value ${index + 1}`}
-              className="bg-dark text-white border-primary border-opacity-75 rounded-0 form-control-sm"
+              className="bg-dark text-white border-info border-opacity-75 rounded-0 form-control-sm"
               onChange={(e) => handleInputChange(e, index)}
             />
           </Col>
@@ -192,22 +192,23 @@ function Body({ setEndpoint, endpoint }) {
     );
   }
 
+  const contentTypes = {
+    None: { body: "", contentType: "" },
+    Text: { contentType: "text/plain" },
+    JSON: { contentType: "application/json" },
+    JavaScript: { contentType: "application/javascript" },
+    HTML: { contentType: "text/html" },
+    XML: { contentType: "application/xml" },
+  };
+
   const handleDropDownValue = (event) => {
     const textInput = event.target.textContent;
     setcontentType(textInput);
-    const contentTypes = {
-      None: { body: "", contentType: "" },
-      Text: { contentType: "text/plain" },
-      JSON: { contentType: "application/json" },
-      JavaScript: { contentType: "application/javascript" },
-      HTML: { contentType: "text/html" },
-      XML: { contentType: "application/xml" },
-    };
     setEndpoint({ ...endpoint, ...contentTypes[textInput] });
   };
 
   return (
-    <div className="px-4 parameter-area">
+    <div className="px-4 body-area">
       <Row className="">
         <Col md={1} className="w-auto">
           <p>Content Type</p>
@@ -216,26 +217,20 @@ function Body({ setEndpoint, endpoint }) {
           <Dropdown>
             <Dropdown.Toggle
               variant="plain"
-              className="custom-dropdown-toggle"
-              style={{ fontSize: "1rem", padding: "0" }}
+              className="btn-dropdown-request-input"
             >
               {contentType}
             </Dropdown.Toggle>
             <Dropdown.Menu variant="dark">
-              <Dropdown.Item onClick={handleDropDownValue}>None</Dropdown.Item>
-              <Dropdown.Divider
-                style={{ backgroundColor: "grey" }}
-              ></Dropdown.Divider>
-              <Dropdown.Item onClick={handleDropDownValue}>Text</Dropdown.Item>
-              <Dropdown.Item onClick={handleDropDownValue}>JSON</Dropdown.Item>
-              <Dropdown.Divider
-                style={{ backgroundColor: "grey" }}
-              ></Dropdown.Divider>
-              <Dropdown.Item onClick={handleDropDownValue}>
-                JavaScript
-              </Dropdown.Item>
-              <Dropdown.Item onClick={handleDropDownValue}>HTML</Dropdown.Item>
-              <Dropdown.Item onClick={handleDropDownValue}>XML</Dropdown.Item>
+              {Object.keys(contentTypes).map((key) => (
+                <Dropdown.Item
+                  key={key}
+                  onClick={handleDropDownValue}
+                  className="dropdown-item"
+                >
+                  {key}
+                </Dropdown.Item>
+              ))}
             </Dropdown.Menu>
           </Dropdown>
         </Col>
