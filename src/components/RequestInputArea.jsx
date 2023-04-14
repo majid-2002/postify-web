@@ -64,6 +64,10 @@ function RequestInputArea({ endpoint, setEndpoint }) {
 
 // Parameters Component
 function Parameters({ endpoint, setEndpoint, parameter, setParameter }) {
+
+  
+  
+
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...parameter];
@@ -80,17 +84,29 @@ function Parameters({ endpoint, setEndpoint, parameter, setParameter }) {
       setParameter([...list, { key: "", value: "" }]);
     }
   };
-
+  
   const handleAddClick = () => {
     setParameter([...parameter, { key: "", value: "" }]);
   };
 
   const handleRemoveClick = (index) => {
     const list = [...parameter];
-    list.splice(index, 1);
+    const removedParam = list.splice(index, 1)[0];
+  
+    // Only update endpoint.params if the deleted parameter had a non-empty key and value
+    if (removedParam.key !== "" && removedParam.value !== "") {
+      const params = list.reduce((acc, item) => {
+        if (item.key !== "" && item.value !== "") {
+          acc[item.key] = item.value;
+        }
+        return acc;
+      }, {});
+      setEndpoint({ ...endpoint, params });
+    }
+  
     setParameter(list);
   };
-
+  
   return (
     <div className="px-4 parameter-area">
       <p>Query Parameters</p>
@@ -244,6 +260,13 @@ function Body({ setEndpoint, endpoint }) {
 
 // Headers Component
 function Headers({ endpoint, setEndpoint, setHeader, header }) {
+
+  React.useEffect(() => {
+    console.log(header)
+    console.log(endpoint.headers)
+  }, [header, endpoint])
+
+
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...header];
@@ -267,7 +290,19 @@ function Headers({ endpoint, setEndpoint, setHeader, header }) {
 
   const handleRemoveClick = (index) => {
     const list = [...header];
-    list.splice(index, 1);
+    const removedHeader = list.splice(index, 1)[0];
+  
+    // Only update endpoint.headers if the deleted parameter had a non-empty key and value
+    if (removedHeader.key !== "" && removedHeader.value !== "") {
+      const headers = list.reduce((acc, item) => {
+        if (item.key !== "" && item.value !== "") {
+          acc[item.key] = item.value;
+        }
+        return acc;
+      }, {});
+      setEndpoint({ ...endpoint, headers });
+    }
+  
     setHeader(list);
   };
 
@@ -282,7 +317,7 @@ function Headers({ endpoint, setEndpoint, setHeader, header }) {
               name="key"
               type="text"
               placeholder={`Header ${index + 1}`}
-              className="bg-dark text-white border-primary border-opacity-75 rounded-0 form-control-sm"
+              className="bg-dark text-white border-info border-opacity-75 rounded-0 form-control-sm"
               onChange={(e) => handleInputChange(e, index)}
             />
           </Col>
@@ -292,7 +327,7 @@ function Headers({ endpoint, setEndpoint, setHeader, header }) {
               name="value"
               type="text"
               placeholder={`Value ${index + 1}`}
-              className="bg-dark text-white border-primary border-opacity-75 rounded-0 form-control-sm"
+              className="bg-dark text-white border-info border-opacity-75 rounded-0 form-control-sm"
               onChange={(e) => handleInputChange(e, index)}
             />
           </Col>
