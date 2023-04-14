@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 
-function HistoryCard({ method, url, datetime }) {
-
-  
-
+function HistoryCard({ method, url, datetime, endpoint }) {
   const shortenedUrl = url.length > 30 ? url.substr(0, 30) + "..." : url;
   const methodClassName = `fs-5 ${method.toLowerCase()}-method`;
+
+  function handleClick(){
+    console.log(endpoint);
+  }
 
 
 
 
   return (
-    <div className="history-card rounded-2" onClick={() => console.log("clicked")}>
+    <div className="history-card rounded-2" onClick={handleClick}>
       <div className="row-cols-2 d-flex align-items-center">
         <div style={{width : "70px"}} className="text-center">
           <h3 className={methodClassName}>{method}</h3>
@@ -59,6 +60,7 @@ function History({ localStorageEndpoints }) {
             method={endpoint.method}
             url={endpoint.url}
             datetime={endpoint.formattedDate}
+            endpoint={endpoint}
           />
         ))}
       </div>
