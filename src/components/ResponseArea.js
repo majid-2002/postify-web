@@ -26,8 +26,8 @@ export default function ResponseArea({ responseData, Loading }) {
   };
 
   const statusLabel = { value: "Status", style: customStyle };
-  const timeLabel = { value: "Time", style: { color: "#0d6efd" } };
-  const sizeLabel = { value: "Size", style: { color: "#0d6efd" } };
+  const timeLabel = { value: "Time", style: { color: "#17a2b8" } };
+  const sizeLabel = { value: "Size", style: { color: "#17a2b8" } };
   const labels = [statusLabel, timeLabel, sizeLabel];
 
   return (
@@ -41,8 +41,9 @@ export default function ResponseArea({ responseData, Loading }) {
           {Loading ? (
             <div className="text-center pt-5">
               <Button
+                style={{ backgroundColor: "#17a2b8" }}
                 startDecorator={
-                  <CircularProgress variant="solid" thickness={3} />
+                  <CircularProgress variant="soft" thickness={3}  />
                 }
               >
                 Loading…
