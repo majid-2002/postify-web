@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 
 function HistoryCard({ method, url, datetime }) {
-  const shortenedUrl = url.length > 30 ? url.substr(0, 30) + "..." : url;
 
+  
+
+  const shortenedUrl = url.length > 30 ? url.substr(0, 30) + "..." : url;
   const methodClassName = `fs-5 ${method.toLowerCase()}-method`;
 
+
+
+
   return (
-    <div className="history-card rounded-2">
+    <div className="history-card rounded-2" onClick={() => console.log("clicked")}>
       <div className="row-cols-2 d-flex align-items-center">
         <div style={{width : "70px"}} className="text-center">
           <h3 className={methodClassName}>{method}</h3>

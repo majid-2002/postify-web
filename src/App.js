@@ -31,7 +31,7 @@ function App() {
   const [Loading, setLoading] = useState(false);
 
   const [localStorageEndpoints, setlocalStorageEndpoint] = useState(
-    JSON.parse(localStorage.getItem("localStorageEndpoints")) || []
+    JSON.parse(localStorage.getItem("endpoints")) || []
   );
 
   const handleSubmitRequest = async () => {
@@ -90,7 +90,7 @@ function App() {
         const newEndpoint = { ...endpoint, dateAndTime };
         setlocalStorageEndpoint([...localStorageEndpoints, newEndpoint]);
         localStorage.setItem(
-          "localStorageEndpoints",
+          "endpoints",
           JSON.stringify([...localStorageEndpoints, newEndpoint])
         );
       }
