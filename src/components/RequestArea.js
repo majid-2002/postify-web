@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { Button, Dropdown } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { Alert } from "@mui/joy";
-import Typography from '@mui/joy/Typography';
-import WarningIcon from '@mui/icons-material/Warning';
+import Typography from "@mui/joy/Typography";
+import Info from "@mui/icons-material/InfoOutlined";
+
+
+import Fade from "@mui/material/Fade";
 
 function RequestArea({ endpoint, setEndpoint, handleSubmit }) {
-  const [hasError, setHasError] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleRequestType = (method) => {
     setEndpoint({ ...endpoint, method });
@@ -15,11 +18,11 @@ function RequestArea({ endpoint, setEndpoint, handleSubmit }) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (!endpoint.url) {
-      setHasError(true);
-      return;
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 2000);
+    } else {
+      handleSubmit();
     }
-    setHasError(false);
-    handleSubmit();
   };
 
   return (
@@ -61,17 +64,18 @@ function RequestArea({ endpoint, setEndpoint, handleSubmit }) {
           </Button>
         </div>
       </Form>
-      {hasError && (
+      <Fade in={showAlert}>
         <Alert
-          startDecorator={<WarningIcon sx={{ mx: 0.5 }} />}
-          variant="soft"
-          color="danger"
+          startDecorator={<Info sx={{ mx: 0.5 }} color="info" />}
+          variant="outlined"
+          color="info"
+          sx={{ width: 250 , height: 40, position: "relative" , top: 10, left: 25, zIndex: 1000,}}
         >
-          <Typography color="danger" fontWeight="md">
-            This file was successfully deleted
+          <Typography sx={{ color: "white" }} fontWeight="medium">
+            Please enter the URL.
           </Typography>
         </Alert>
-      )}
+      </Fade>
     </div>
   );
 }
