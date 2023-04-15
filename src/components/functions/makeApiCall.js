@@ -3,10 +3,7 @@ import axios from "axios";
 export const makeApiCall = async (endpoint) => {
   const config = {
     method: endpoint.method,
-    url: /^https?:\/\//i.test(endpoint.url)
-      ? endpoint.url
-      : `http://${endpoint.url}`,
-
+    url: endpoint.url,
     headers: {
       ...endpoint.headers,
       "Content-Type": endpoint.contentType,

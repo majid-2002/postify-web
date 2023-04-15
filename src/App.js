@@ -11,10 +11,8 @@ import parserHtml from "prettier/parser-html";
 export const UserContext = createContext();
 
 function App() {
-
   const [parameter, setParameter] = useState([{ key: "", value: "" }]);
   const [header, setHeader] = useState([{ key: "", value: "" }]);
-
 
   const [endpoint, setEndpoint] = React.useState({
     url: "",
@@ -45,6 +43,9 @@ function App() {
     let endTime = null;
     let responseSize = "-";
     try {
+      if (!/^https?:\/\//i.test(endpoint.url)) {
+        endpoint.url = `http://${endpoint.url}`;
+      }
       startTime = Date.now();
       const response = await makeApiCall(endpoint);
       endTime = Date.now();
@@ -156,7 +157,16 @@ function App() {
 
   return (
     <div className="main">
-      <UserContext.Provider value={{ parameter, setParameter, header, setHeader, setEndpoint , endpoint }}>
+      <UserContext.Provider
+        value={{
+          parameter,
+          setParameter,
+          header,
+          setHeader,
+          setEndpoint,
+          endpoint,
+        }}
+      >
         <HeaderArea />
         <RequestArea
           endpoint={endpoint}
