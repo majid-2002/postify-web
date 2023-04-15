@@ -42,10 +42,12 @@ function App() {
     let startTime = null;
     let endTime = null;
     let responseSize = "-";
-    try {
+    try { 
+
       if (!/^https?:\/\//i.test(endpoint.url)) {
         endpoint.url = `http://${endpoint.url}`;
       }
+
       startTime = Date.now();
       const response = await makeApiCall(endpoint);
       endTime = Date.now();
