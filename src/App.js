@@ -54,13 +54,9 @@ function App() {
 
       const contentType = response.headers["content-type"] || "unknown";
 
-      responseSize = (
-        new TextEncoder().encode(JSON.stringify(response.data)).length / 1024
-      ).toFixed(2);
-
       let stringValue;
       if (contentType.includes("json")) {
-        stringValue = response.data;
+        stringValue =  response.data;
       } else if (contentType.includes("html")) {
         stringValue = prettier.format(response.data, {
           parser: "html",
@@ -74,6 +70,10 @@ function App() {
         stringValue = response.data || response.statusText;
       }
 
+      responseSize = (
+        new TextEncoder().encode(JSON.stringify(response.data)).length / 1024
+      ).toFixed(2);
+
       setResponseData({
         data: stringValue,
         lang_type: contentType.split(";")[0].split("/")[1], //? "json" or "html" or "xml" or "javascript" or "plain"
@@ -82,17 +82,23 @@ function App() {
         size: responseSize, // size of the response in bytes
       });
 
-      const exists = localStorageEndpoints.some(
-        (e) =>
-          e.url === endpoint.url &&
-          e.method === endpoint.method &&
-          e.body === endpoint.body &&
-          e.contentType === endpoint.contentType &&
-          e.headers === endpoint.headers &&
-          e.params === endpoint.params
-      );
+      console.log(localStorageEndpoints);
 
-      if (!exists) {
+      const exists = localStorageEndpoints.some(
+        (e) => {
+          const urlWithoutProtocol = e.url.replace(/^https?:\/\//, "");
+          const endpointUrlWithoutProtocol = endpoint.url.replace(/^https?:\/\//, "");
+          return urlWithoutProtocol === endpointUrlWithoutProtocol &&
+                 e.method === endpoint.method &&
+                 e.body === endpoint.body &&
+                 e.contentType === endpoint.contentType &&
+                 JSON.stringify(e.headers) === JSON.stringify(endpoint.headers) &&
+                 JSON.stringify(e.params) === JSON.stringify(endpoint.params);
+        }
+      );
+      
+
+      if (exists === false) {
         const dateAndTime = new Date().toLocaleString("en-US", {
           hour12: false,
           hour: "numeric",

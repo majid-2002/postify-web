@@ -68,7 +68,7 @@ export default function ResponseArea({ responseData, Loading }) {
               <Row>
                 <CodeMirror
                   value={
-                    contentType === "json"
+                    contentType === "json" || typeof data === "object"
                       ? JSON.stringify(data, null, 2)
                       : data
                   }
