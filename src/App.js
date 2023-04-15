@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import HeaderArea from "./components/HeaderArea";
 import RequestArea from "./components/RequestArea";
 import ResponseArea from "./components/ResponseArea";
@@ -8,7 +8,12 @@ import { makeApiCall } from "./components/functions/makeApiCall";
 import prettier from "prettier/standalone";
 import parserHtml from "prettier/parser-html";
 
+export const UserContext = createContext();
+
 function App() {
+
+  const [parameter, setParameter] = useState([{ key: "", value: "" }]);
+  const [header, setHeader] = useState([{ key: "", value: "" }]);
 
 
   const [endpoint, setEndpoint] = React.useState({
@@ -52,7 +57,7 @@ function App() {
 
       let stringValue;
       if (contentType.includes("json")) {
-        stringValue = JSON.stringify(response.data, null, 2);
+        stringValue = response.data;
       } else if (contentType.includes("html")) {
         stringValue = prettier.format(response.data, {
           parser: "html",
@@ -75,7 +80,13 @@ function App() {
       });
 
       const exists = localStorageEndpoints.some(
-        (e) => e.url === endpoint.url && e.method === endpoint.method
+        (e) =>
+          e.url === endpoint.url &&
+          e.method === endpoint.method &&
+          e.body === endpoint.body &&
+          e.contentType === endpoint.contentType &&
+          e.headers === endpoint.headers &&
+          e.params === endpoint.params
       );
 
       if (!exists) {
@@ -145,15 +156,17 @@ function App() {
 
   return (
     <div className="main">
-      <HeaderArea />
-      <RequestArea
-        endpoint={endpoint}
-        setEndpoint={setEndpoint}
-        handleSubmit={handleSubmitRequest}
-      />
-      <History localStorageEndpoints={localStorageEndpoints} />
-      <RequestInputArea endpoint={endpoint} setEndpoint={setEndpoint} />
-      <ResponseArea responseData={responseData} Loading={Loading} />
+      <UserContext.Provider value={{ parameter, setParameter, header, setHeader, setEndpoint , endpoint }}>
+        <HeaderArea />
+        <RequestArea
+          endpoint={endpoint}
+          setEndpoint={setEndpoint}
+          handleSubmit={handleSubmitRequest}
+        />
+        <History localStorageEndpoints={localStorageEndpoints} />
+        <RequestInputArea endpoint={endpoint} setEndpoint={setEndpoint} />
+        <ResponseArea responseData={responseData} Loading={Loading} />
+      </UserContext.Provider>
     </div>
   );
 }

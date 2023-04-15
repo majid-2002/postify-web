@@ -9,8 +9,6 @@ import Button from "@mui/joy/Button";
 import CircularProgress from "@mui/joy/CircularProgress";
 import { dracula } from "@uiw/codemirror-theme-dracula";
 
-
-
 export default function ResponseArea({ responseData, Loading }) {
   const { data, lang_type: contentType, status, time, size } = responseData;
 
@@ -43,7 +41,7 @@ export default function ResponseArea({ responseData, Loading }) {
               <Button
                 style={{ backgroundColor: "#17a2b8" }}
                 startDecorator={
-                  <CircularProgress variant="soft" thickness={3}  />
+                  <CircularProgress variant="soft" thickness={3} />
                 }
               >
                 Loading…
@@ -60,14 +58,20 @@ export default function ResponseArea({ responseData, Loading }) {
                         ? status
                         : index === 1
                         ? `${time} ms`
-                        : status >= 400 || status === "Error" ? `${size} B` : `${size} KB`}
+                        : status >= 400 || status === "Error"
+                        ? `${size} B`
+                        : `${size} KB`}
                     </p>
                   </Col>
                 ))}
               </Row>
               <Row>
                 <CodeMirror
-                  value={data}
+                  value={
+                    contentType === "json"
+                      ? JSON.stringify(data, null, 2)
+                      : data
+                  }
                   readOnly={true}
                   placeholder={"Your response goes here."}
                   theme={dracula}

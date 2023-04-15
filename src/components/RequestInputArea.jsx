@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Row, Col, Form, Dropdown, Button } from "react-bootstrap";
 import FeatherIcon from "feather-icons-react";
 import CodeMirror from "@uiw/react-codemirror";
@@ -7,11 +7,11 @@ import { json } from "@codemirror/lang-json";
 import { javascript } from "@codemirror/lang-javascript";
 import { xml } from "@codemirror/lang-xml";
 import { html } from "@codemirror/lang-html";
+import { UserContext } from "../App";
 
 function RequestInputArea({ endpoint, setEndpoint }) {
   const [showComponentItem, setshowComponentItem] = useState("parameter");
-  const [parameter, setParameter] = useState([{ key: "", value: "" }]);
-  const [header, setHeader] = useState([{ key: "", value: "" }]);
+  const { parameter, setParameter, header, setHeader } = useContext(UserContext);
 
   return (
     <div className="request-input-area">
@@ -41,6 +41,7 @@ function RequestInputArea({ endpoint, setEndpoint }) {
           Header
         </li>
       </ul>
+      
       {showComponentItem === "parameter" ? (
         <Parameters
           endpoint={endpoint}
