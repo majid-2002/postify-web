@@ -13,7 +13,7 @@ export const makeApiCalltest = async () => {
 
   try {
     const response = await axios(config);
-    console.log(response.data)
+    console.log(response.data);
   } catch (error) {
     console.error(error);
   }

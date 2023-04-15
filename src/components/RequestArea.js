@@ -4,8 +4,6 @@ import Form from "react-bootstrap/Form";
 import { Alert } from "@mui/joy";
 import Typography from "@mui/joy/Typography";
 import Info from "@mui/icons-material/InfoOutlined";
-
-
 import Fade from "@mui/material/Fade";
 
 function RequestArea({ endpoint, setEndpoint, handleSubmit }) {

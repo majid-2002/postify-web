@@ -2,15 +2,10 @@ import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "../App";
 
 function HistoryCard({ endpointLocal }) {
-
-  const { setParameter, setHeader, setEndpoint, endpoint } = useContext(UserContext);
+  const { setParameter, setHeader, setEndpoint } = useContext(UserContext);
   const { formattedDate, method, url, body, params, headers, contentType } = endpointLocal;
   const shortenedUrl = url.length > 27 ? url.substr(0, 27) + "..." : url;
   const methodClassName = `fs-5 ${method.toLowerCase()}-method`;
-
-  useEffect(() => {
-    console.log(endpoint);
-  }, [endpoint]);
 
   const handleClick = () => {
     const paramsArray = Object.entries(params).map(([key, value]) => ({

@@ -42,8 +42,7 @@ function App() {
     let startTime = null;
     let endTime = null;
     let responseSize = "-";
-    try { 
-
+    try {
       if (!/^https?:\/\//i.test(endpoint.url)) {
         endpoint.url = `http://${endpoint.url}`;
       }
@@ -56,7 +55,7 @@ function App() {
 
       let stringValue;
       if (contentType.includes("json")) {
-        stringValue =  response.data;
+        stringValue = response.data;
       } else if (contentType.includes("html")) {
         stringValue = prettier.format(response.data, {
           parser: "html",
@@ -84,19 +83,21 @@ function App() {
 
       console.log(localStorageEndpoints);
 
-      const exists = localStorageEndpoints.some(
-        (e) => {
-          const urlWithoutProtocol = e.url.replace(/^https?:\/\//, "");
-          const endpointUrlWithoutProtocol = endpoint.url.replace(/^https?:\/\//, "");
-          return urlWithoutProtocol === endpointUrlWithoutProtocol &&
-                 e.method === endpoint.method &&
-                 e.body === endpoint.body &&
-                 e.contentType === endpoint.contentType &&
-                 JSON.stringify(e.headers) === JSON.stringify(endpoint.headers) &&
-                 JSON.stringify(e.params) === JSON.stringify(endpoint.params);
-        }
-      );
-      
+      const exists = localStorageEndpoints.some((e) => {
+        const urlWithoutProtocol = e.url.replace(/^https?:\/\//, "");
+        const endpointUrlWithoutProtocol = endpoint.url.replace(
+          /^https?:\/\//,
+          ""
+        );
+        return (
+          urlWithoutProtocol === endpointUrlWithoutProtocol &&
+          e.method === endpoint.method &&
+          e.body === endpoint.body &&
+          e.contentType === endpoint.contentType &&
+          JSON.stringify(e.headers) === JSON.stringify(endpoint.headers) &&
+          JSON.stringify(e.params) === JSON.stringify(endpoint.params)
+        );
+      });
 
       if (exists === false) {
         const dateAndTime = new Date().toLocaleString("en-US", {
