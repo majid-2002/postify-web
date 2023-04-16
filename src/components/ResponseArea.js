@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { html } from "@codemirror/lang-html";
 import { Col, Row } from "react-bootstrap";
@@ -10,7 +10,7 @@ import CircularProgress from "@mui/joy/CircularProgress";
 import { dracula } from "@uiw/codemirror-theme-dracula";
 import { useState } from "react";
 
-export default function ResponseArea({ responseData, Loading }) {
+function ResponseArea({ responseData, Loading }) {
   const { data, lang_type: contentType, status, time, size } = responseData;
 
   function Prettified() {
@@ -142,7 +142,7 @@ export default function ResponseArea({ responseData, Loading }) {
                   </li>
                 </ul>
               </Row>
-              {showComponentItem === "prettified" ? <Prettified /> : <Raw />}
+              {showComponentItem === "prettified" ? <Prettified key="prettified" /> : <Raw key="raw"/>}
             </>
           )}
         </div>
@@ -150,3 +150,6 @@ export default function ResponseArea({ responseData, Loading }) {
     </div>
   );
 }
+
+
+export default memo(ResponseArea);

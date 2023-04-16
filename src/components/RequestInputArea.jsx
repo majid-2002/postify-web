@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, memo } from "react";
 import { Row, Col, Form, Dropdown, Button } from "react-bootstrap";
 import FeatherIcon from "feather-icons-react";
 import CodeMirror from "@uiw/react-codemirror";
