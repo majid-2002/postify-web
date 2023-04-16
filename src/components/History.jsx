@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
+import { styled } from "@mui/material/styles";
 import { UserContext } from "../App";
 
 function HistoryCard({ endpointLocal }) {
   const { setParameter, setHeader, setEndpoint } = useContext(UserContext);
-  const { formattedDate, method, url, body, params, headers, contentType } = endpointLocal;
+  const { formattedDate, method, url, body, params, headers, contentType } =
+    endpointLocal;
   const shortenedUrl = url.length > 27 ? url.substr(0, 27) + "..." : url;
   const methodClassName = `fs-5 ${method.toLowerCase()}-method`;
 
@@ -30,20 +33,38 @@ function HistoryCard({ endpointLocal }) {
     setHeader(headersArray);
   };
 
+  const LightTooltip = styled(({ className, ...props }) => (
+    <Tooltip {...props} classes={{ popper: className }} arrow placement="top" />
+  ))(({ theme }) => ({
+    [`& .${tooltipClasses.tooltip}`]: {
+      backgroundColor: theme.palette.common.white,
+      color: "rgba(0, 0, 0, 0.87)",
+      boxShadow: theme.shadows[1],
+      fontSize: 11,
+    },
+    [`& .${tooltipClasses.arrow}`]: {
+      color: theme.palette.common.white,
+    },
+  }));
+
   return (
-    <div className="history-card rounded-2" onClick={handleClick}>
-      <div className="row-cols-2 d-flex align-items-center">
-        <div style={{ width: "70px" }} className="text-center">
-          <h3 className={methodClassName}>{method}</h3>
-        </div>
-        <div className="p-2" style={{ width: "250px" }}>
-          <p>{shortenedUrl}</p>
-          <p>
-            <span>{formattedDate}</span>
-          </p>
+    <LightTooltip
+      title={`URL: ${url}`}
+    >
+      <div className="history-card rounded-2" onClick={handleClick}>
+        <div className="row-cols-2 d-flex align-items-center">
+          <div style={{ width: "70px" }} className="text-center">
+            <h3 className={methodClassName}>{method}</h3>
+          </div>
+          <div className="p-2" style={{ width: "250px" }}>
+            <p>{shortenedUrl}</p>
+            <p>
+              <span>{formattedDate}</span>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </LightTooltip>
   );
 }
 
