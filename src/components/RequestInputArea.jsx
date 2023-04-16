@@ -11,7 +11,8 @@ import { UserContext } from "../App";
 
 function RequestInputArea({ endpoint, setEndpoint }) {
   const [showComponentItem, setshowComponentItem] = useState("parameter");
-  const { parameter, setParameter, header, setHeader } = useContext(UserContext);
+  const { parameter, setParameter, header, setHeader } =
+    useContext(UserContext);
 
   return (
     <div className="request-input-area">
@@ -41,7 +42,7 @@ function RequestInputArea({ endpoint, setEndpoint }) {
           Header
         </li>
       </ul>
-      
+
       {showComponentItem === "parameter" ? (
         <Parameters
           endpoint={endpoint}
@@ -65,10 +66,6 @@ function RequestInputArea({ endpoint, setEndpoint }) {
 
 // Parameters Component
 function Parameters({ endpoint, setEndpoint, parameter, setParameter }) {
-
-  
-  
-
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...parameter];
@@ -85,7 +82,7 @@ function Parameters({ endpoint, setEndpoint, parameter, setParameter }) {
       setParameter([...list, { key: "", value: "" }]);
     }
   };
-  
+
   const handleAddClick = () => {
     setParameter([...parameter, { key: "", value: "" }]);
   };
@@ -93,7 +90,7 @@ function Parameters({ endpoint, setEndpoint, parameter, setParameter }) {
   const handleRemoveClick = (index) => {
     const list = [...parameter];
     const removedParam = list.splice(index, 1)[0];
-  
+
     // Only update endpoint.params if the deleted parameter had a non-empty key and value
     if (removedParam.key !== "" && removedParam.value !== "") {
       const params = list.reduce((acc, item) => {
@@ -104,10 +101,10 @@ function Parameters({ endpoint, setEndpoint, parameter, setParameter }) {
       }, {});
       setEndpoint({ ...endpoint, params });
     }
-  
+
     setParameter(list);
   };
-  
+
   return (
     <div className="px-4 parameter-area">
       <p>Query Parameters</p>
@@ -115,6 +112,7 @@ function Parameters({ endpoint, setEndpoint, parameter, setParameter }) {
         <Row className="g-2 my-1" key={index}>
           <Col md={6}>
             <Form.Control
+              autoComplete="off"
               value={param.key}
               name="key"
               type="text"
@@ -125,6 +123,7 @@ function Parameters({ endpoint, setEndpoint, parameter, setParameter }) {
           </Col>
           <Col md={5}>
             <Form.Control
+              autoComplete="off"
               value={param.value}
               name="value"
               type="text"
@@ -261,12 +260,10 @@ function Body({ setEndpoint, endpoint }) {
 
 // Headers Component
 function Headers({ endpoint, setEndpoint, setHeader, header }) {
-
   React.useEffect(() => {
-    console.log(header)
-    console.log(endpoint.headers)
-  }, [header, endpoint])
-
+    console.log(header);
+    console.log(endpoint.headers);
+  }, [header, endpoint]);
 
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -292,7 +289,7 @@ function Headers({ endpoint, setEndpoint, setHeader, header }) {
   const handleRemoveClick = (index) => {
     const list = [...header];
     const removedHeader = list.splice(index, 1)[0];
-  
+
     // Only update endpoint.headers if the deleted parameter had a non-empty key and value
     if (removedHeader.key !== "" && removedHeader.value !== "") {
       const headers = list.reduce((acc, item) => {
@@ -303,17 +300,18 @@ function Headers({ endpoint, setEndpoint, setHeader, header }) {
       }, {});
       setEndpoint({ ...endpoint, headers });
     }
-  
+
     setHeader(list);
   };
 
   return (
     <div className="px-4 parameter-area">
-      <p>Query Parameters</p>
+      <p>Header List</p>
       {header.map((head, index) => (
         <Row className="g-2 my-1" key={index}>
           <Col md={6}>
             <Form.Control
+              autoComplete="off"
               value={head.key}
               name="key"
               type="text"
@@ -324,6 +322,7 @@ function Headers({ endpoint, setEndpoint, setHeader, header }) {
           </Col>
           <Col md={5}>
             <Form.Control
+              autoComplete="off"
               value={head.value}
               name="value"
               type="text"
