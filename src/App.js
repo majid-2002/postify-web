@@ -81,8 +81,6 @@ function App() {
         size: responseSize, // size of the response in bytes
       });
 
-      console.log(localStorageEndpoints);
-
       const exists = localStorageEndpoints.some((e) => {
         const urlWithoutProtocol = e.url.replace(/^https?:\/\//, "");
         const endpointUrlWithoutProtocol = endpoint.url.replace(
@@ -140,6 +138,48 @@ function App() {
         statusCode = "Error";
         errorType = error.name || "Unknown error";
         errorMessage = error.message || "An error occurred.";
+      }
+
+      const errorEndpoint = {
+        ...endpoint,
+        response: error.response?.data || {
+          statusCode,
+          error: errorType,
+          message: errorMessage,
+        },
+      };
+
+      const exists = localStorageEndpoints.some((e) => {
+        const urlWithoutProtocol = e.url.replace(/^https?:\/\//, "");
+        const endpointUrlWithoutProtocol = endpoint.url.replace(
+          /^https?:\/\//,
+          ""
+        );
+        return (
+          urlWithoutProtocol === endpointUrlWithoutProtocol &&
+          e.method === endpoint.method &&
+          e.body === endpoint.body &&
+          e.contentType === endpoint.contentType &&
+          JSON.stringify(e.headers) === JSON.stringify(endpoint.headers) &&
+          JSON.stringify(e.params) === JSON.stringify(endpoint.params)
+        );
+      });
+
+      if (exists === false) {
+        const dateAndTime = new Date().toLocaleString("en-US", {
+          hour12: false,
+          hour: "numeric",
+          minute: "numeric",
+          day: "numeric",
+          month: "numeric",
+          year: "numeric",
+        });
+        const newEndpoint = { ...errorEndpoint, dateAndTime };
+        setlocalStorageEndpoint([...localStorageEndpoints, newEndpoint]);
+        localStorage.setItem(
+          "endpoints",
+          JSON.stringify([...localStorageEndpoints, newEndpoint])
+        );
       }
 
       const errorResponseData = {
