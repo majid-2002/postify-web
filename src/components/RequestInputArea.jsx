@@ -144,13 +144,13 @@ function Parameters({ endpoint, setEndpoint, parameter, setParameter }) {
       ))}
       {parameter.length === 0 && (
         <div className="d-flex align-items-center justify-content-center btn-group-sm btn-parameter-container">
-          <Button
-            className="btn btn-outline-info btn-dark d-block"
-            onClick={handleAddClick}
-          >
-            <FeatherIcon icon="plus" size="1.4em" />
-            Add Parameter
-          </Button>
+            <Button
+              className="btn btn-outline-info btn-dark d-block"
+              onClick={handleAddClick}
+            >
+              <FeatherIcon icon="plus" size="1.4em" />
+              Add Parameter
+            </Button>
         </div>
       )}
     </div>

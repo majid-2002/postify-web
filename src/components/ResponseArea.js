@@ -11,6 +11,7 @@ import { dracula } from "@uiw/codemirror-theme-dracula";
 import { useState } from "react";
 import { Tooltip } from "@mui/material";
 import { FileCopyOutlined } from "@mui/icons-material";
+import FeatherIcon from "feather-icons-react";
 
 function ResponseArea({ responseData, Loading }) {
   const { data, lang_type: contentType, status, time, size } = responseData;
@@ -84,8 +85,11 @@ function ResponseArea({ responseData, Loading }) {
   return (
     <div>
       {data === "" ? (
-        <div className="response-area text-secondary text-center pt-5 px-4">
-          <p>Send a request</p>
+        <div className="response-area text-secondary d-flex justify-content-center align-items-center fs-6 fw-bold">
+          <p className="me-3">Send a request</p>
+          <p>
+            <FeatherIcon icon="send" size="2.3em" className="request-icons" />
+          </p>
         </div>
       ) : (
         <div className="response-area px-4">
