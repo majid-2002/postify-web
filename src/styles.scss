@@ -170,12 +170,6 @@ body {
     float: right;
     border-top: 1px silver inset;
 
-    .response-p {
-      color: #fafafa5a;
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-
     ul {
       padding: 0;
       li {
@@ -192,6 +186,18 @@ body {
           transition: 0.2s;
         }
       }
+    }
+
+    .nav-body p {
+      color: #fafafa5a;
+      font-size: 0.9rem;
+      font-weight: 500;
+
+      &:last-child{
+        font-size: 1.3rem;
+        cursor: pointer;
+      }
+
     }
 
     .cm-scroller::-webkit-scrollbar {

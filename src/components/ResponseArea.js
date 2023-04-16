@@ -1,4 +1,4 @@
-import React, {memo} from "react";
+import React, { memo } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { html } from "@codemirror/lang-html";
 import { Col, Row } from "react-bootstrap";
@@ -9,6 +9,8 @@ import Button from "@mui/joy/Button";
 import CircularProgress from "@mui/joy/CircularProgress";
 import { dracula } from "@uiw/codemirror-theme-dracula";
 import { useState } from "react";
+import { Tooltip } from "@mui/material";
+import { FileCopyOutlined } from "@mui/icons-material";
 
 function ResponseArea({ responseData, Loading }) {
   const { data, lang_type: contentType, status, time, size } = responseData;
@@ -16,7 +18,6 @@ function ResponseArea({ responseData, Loading }) {
   function Prettified() {
     return (
       <Row>
-        <p className="response-p">Response Body</p>
         <CodeMirror
           value={
             contentType === "json" || typeof data === "object"
@@ -46,7 +47,6 @@ function ResponseArea({ responseData, Loading }) {
   function Raw() {
     return (
       <Row>
-        <p className="response-p">Response Body</p>
         <CodeMirror
           theme={dracula}
           value={
@@ -78,6 +78,8 @@ function ResponseArea({ responseData, Loading }) {
   const timeLabel = { value: "Time", style: { color: "#17a2b8" } };
   const sizeLabel = { value: "Size", style: { color: "#17a2b8" } };
   const labels = [statusLabel, timeLabel, sizeLabel];
+
+  const [copied, setCopied] = useState(false);
 
   return (
     <div>
@@ -142,7 +144,39 @@ function ResponseArea({ responseData, Loading }) {
                   </li>
                 </ul>
               </Row>
-              {showComponentItem === "prettified" ? <Prettified key="prettified" /> : <Raw key="raw"/>}
+              <Row className="nav-body">
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <p>Response Body</p>
+                  <p
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        contentType === "json" || typeof data === "object"
+                          ? JSON.stringify(data, null, 2)
+                          : data
+                      );
+                      setCopied(true);
+                    }}
+                  >
+                    <Tooltip
+                      title={copied ? "Copied!" : "Copy"}
+                      placement="top"
+                    >
+                      <FileCopyOutlined />
+                    </Tooltip>
+                  </p>
+                </div>
+              </Row>
+              {showComponentItem === "prettified" ? (
+                <Prettified key="prettified" />
+              ) : (
+                <Raw key="raw" />
+              )}
             </>
           )}
         </div>
@@ -150,6 +184,5 @@ function ResponseArea({ responseData, Loading }) {
     </div>
   );
 }
-
 
 export default memo(ResponseArea);
