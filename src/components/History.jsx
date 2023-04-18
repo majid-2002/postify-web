@@ -83,7 +83,7 @@ function History({ localStorageEndpoints }) {
         return { ...rest, formattedDate };
       }
     );
-    setEndpoints(updatedEndpoints);
+    setEndpoints(updatedEndpoints.reverse());
   }, [localStorageEndpoints]);
 
   return (
