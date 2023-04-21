@@ -114,19 +114,17 @@ function App() {
         );
       }
     } catch (error) {
-      const { response } = error;
-
       let statusCode, errorType, errorMessage;
 
-      if (response) {
+      if (error.response) {
         // Handle API errors
-        statusCode = response.status;
+        statusCode = error.response.status;
         if (statusCode >= 400) {
-          errorType = response.data?.error || "Unknown error";
+          errorType = error.response.data?.error || "Unknown error";
         }
         errorMessage =
-          response.data?.message ||
-          response.statusText ||
+          error.response.data?.message ||
+          error.response.statusText ||
           "An error occurred while processing the request.";
       } else if (error.request) {
         // Handle network errors
@@ -193,7 +191,7 @@ function App() {
       ).length;
 
       setResponseData({
-        data: JSON.stringify(errorResponseData, null, 2),
+        data: errorResponseData,
         lang_type: "json",
         status: error.response?.status || "Error",
         time: Date.now() - startTime,

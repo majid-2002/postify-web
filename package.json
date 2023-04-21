@@ -10,6 +10,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@lezer/highlight": "^1.1.4",
+    "@lottiefiles/lottie-player": "^1.7.1",
     "@mui/icons-material": "^5.11.16",
     "@mui/joy": "^5.0.0-alpha.75",
     "@mui/material": "^5.12.0",
