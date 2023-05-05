@@ -261,10 +261,6 @@ function Body({ setEndpoint, endpoint }) {
 
 // Headers Component
 function Headers({ endpoint, setEndpoint, setHeader, header }) {
-  React.useEffect(() => {
-    console.log(header);
-    console.log(endpoint.headers);
-  }, [header, endpoint]);
 
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;

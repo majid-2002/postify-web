@@ -7,7 +7,7 @@ function HistoryCard({ endpointLocal }) {
   const { setParameter, setHeader, setEndpoint } = useContext(UserContext);
   const { formattedDate, method, url, body, params, headers, contentType } =
     endpointLocal;
-  const shortenedUrl = url.length > 27 ? url.substr(0, 27) + "..." : url;
+  const shortenedUrl = url.length > 30 ? url.substr(0, 30) + "..." : url;
   const methodClassName = `fs-5 ${method.toLowerCase()}-method`;
 
   const handleClick = () => {
@@ -48,15 +48,13 @@ function HistoryCard({ endpointLocal }) {
   }));
 
   return (
-    <LightTooltip
-      title={`URL: ${url}`}
-    >
-      <div className="history-card rounded-2" onClick={handleClick}>
-        <div className="row-cols-2 d-flex align-items-center">
-          <div style={{ width: "70px" }} className="text-center">
+    <LightTooltip title={`URL: ${url}`}>
+      <div className="history-card rounded-2 my-3 py-2" onClick={handleClick}>
+        <div className="d-flex align-items-center ">
+          <div className="text-center w-25">
             <h3 className={methodClassName}>{method}</h3>
           </div>
-          <div className="p-2" style={{ width: "250px" }}>
+          <div className="overflow-hidden">
             <p>{shortenedUrl}</p>
             <p>
               <span>{formattedDate}</span>

@@ -214,15 +214,19 @@ function App() {
           endpoint,
         }}
       >
-        <HeaderArea />
-        <RequestArea
-          endpoint={endpoint}
-          setEndpoint={setEndpoint}
-          handleSubmit={handleSubmitRequest}
-        />
-        <History localStorageEndpoints={localStorageEndpoints} />
-        <RequestInputArea endpoint={endpoint} setEndpoint={setEndpoint} />
-        <ResponseArea responseData={responseData} Loading={Loading} />
+        <div className="left-area">
+          <HeaderArea />
+          <History localStorageEndpoints={localStorageEndpoints} />
+        </div>
+        <div className="right-area">
+          <RequestArea
+            endpoint={endpoint}
+            setEndpoint={setEndpoint}
+            handleSubmit={handleSubmitRequest}
+          />
+          <RequestInputArea endpoint={endpoint} setEndpoint={setEndpoint} />
+          <ResponseArea responseData={responseData} Loading={Loading} />
+        </div>
       </UserContext.Provider>
     </div>
   );
