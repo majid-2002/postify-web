@@ -33,9 +33,9 @@ body ::-webkit-scrollbar-thumb {
   min-width: 300px;
 }
 .main .right-area {
-  overflow: auto;
   width: 100%;
   background-color: #353739;
+  overflow: auto;
 }
 .main .header-area {
   height: 100px;

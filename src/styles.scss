@@ -33,17 +33,16 @@ body {
   height: 100vh;
   width: 100vw;
   font-family: "Poppins", sans-serif;
-  display:  flex;
+  display: flex;
 
-  .left-area{
+  .left-area {
     min-width: 300px;
   }
-  .right-area{
-    overflow: auto;
+  .right-area {
     width: 100%;
     background-color: #353739;
+    overflow: auto;
   }
-
 
   .header-area {
     height: 100px;
@@ -127,9 +126,7 @@ body {
           color: #fafafa;
           transition: 0.2s;
         }
-        
       }
-      
     }
 
     .parameter-area,
@@ -182,10 +179,9 @@ body {
     height: 100%;
     overflow: auto;
 
-    p{
+    p {
       color: #17a2b8;
     }
-
 
     ul {
       padding: 0;
@@ -210,11 +206,10 @@ body {
       font-size: 0.9rem;
       font-weight: 500;
 
-      &:last-child{
+      &:last-child {
         font-size: 1.3rem;
         cursor: pointer;
       }
-
     }
 
     .cm-scroller::-webkit-scrollbar {
@@ -244,9 +239,6 @@ body {
       }
     }
   }
-
-
-
 
   //? HISTORY
   .history {
@@ -278,7 +270,6 @@ body {
         display: none;
       }
 
-
       .history-card {
         background-color: #212224;
         border: 1px solid #30363d;
@@ -308,8 +299,7 @@ body {
           color: #b7b7b7; /* gray */
         }
 
-
-        p{
+        p {
           width: 250px;
           font-size: 0.8rem;
         }
