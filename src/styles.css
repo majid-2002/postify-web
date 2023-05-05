@@ -30,16 +30,17 @@ body ::-webkit-scrollbar-thumb {
   display: flex;
 }
 .main .left-area {
-  min-width: 250px;
+  min-width: 300px;
 }
 .main .right-area {
   width: 100%;
+  background-color: #353739;
+  overflow: hidden;
 }
 .main .header-area {
-  height: 150px;
+  height: 100px;
   width: 100%;
   background-color: #171718;
-  float: left;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,17 +50,15 @@ body ::-webkit-scrollbar-thumb {
   font-size: 2rem;
 }
 .main .request-area {
-  height: 15%;
   width: 100%;
+  height: 100px;
   background-color: #212224;
-  float: right;
-  padding: 3.5em 0;
+  padding: 1.5rem 0;
 }
 .main .request-area .btn-dropdown-request {
   background-color: #17a2b8;
   width: 80px;
   font-weight: 500;
-  font-size: 1rem;
   border-color: #17a2b8;
   cursor: pointer;
 }
@@ -80,9 +79,8 @@ body ::-webkit-scrollbar-thumb {
      -moz-user-select: none;
           user-select: none;
   width: 100%;
-  height: 35%;
-  float: right;
   background-color: #212224;
+  height: 250px;
   overflow-y: scroll;
 }
 .main .request-input-area .cm-scroller::-webkit-scrollbar {
@@ -108,7 +106,8 @@ body ::-webkit-scrollbar-thumb {
   font-size: 1rem;
   color: rgba(250, 250, 250, 0.4823529412);
   display: inline;
-  margin-inline: 1.4em;
+  font-size: 0.9rem;
+  margin-inline: 1.2em;
   cursor: pointer;
 }
 .main .request-input-area ul li:hover {
@@ -118,7 +117,7 @@ body ::-webkit-scrollbar-thumb {
 .main .request-input-area .parameter-area p,
 .main .request-input-area .body-area p {
   color: rgba(250, 250, 250, 0.3529411765);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 500;
 }
 .main .request-input-area .parameter-area .btn-dropdown-request-input,
@@ -128,6 +127,7 @@ body ::-webkit-scrollbar-thumb {
   padding: 0;
   border: none;
   font-weight: 500;
+  font-size: 0.8rem;
 }
 .main .request-input-area .parameter-area .btn-dropdown-request-input:hover,
 .main .request-input-area .body-area .btn-dropdown-request-input:hover {
@@ -143,6 +143,7 @@ body ::-webkit-scrollbar-thumb {
 .main .request-input-area .body-area .dropdown-menu {
   border: 1px solid #30363d;
   background-color: #212224;
+  font-size: 0.8rem;
 }
 .main .request-input-area .parameter-area .request-icons,
 .main .request-input-area .body-area .request-icons {
@@ -156,10 +157,10 @@ body ::-webkit-scrollbar-thumb {
 }
 .main .response-area {
   width: 100%;
-  height: 50vh;
   background-color: #353739;
-  float: right;
   border-top: 1px silver inset;
+  height: 100%;
+  overflow: auto;
 }
 .main .response-area p {
   color: #17a2b8;
@@ -170,7 +171,7 @@ body ::-webkit-scrollbar-thumb {
 .main .response-area ul li {
   font-weight: 500;
   list-style: none;
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: rgba(250, 250, 250, 0.4823529412);
   display: inline;
   margin-inline: 0.7em;
@@ -204,7 +205,7 @@ body ::-webkit-scrollbar-thumb {
   width: 2vw;
 }
 .main .response-area .result-container h4 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-align: center;
 }
 .main .response-area .result-container p {
@@ -213,7 +214,6 @@ body ::-webkit-scrollbar-thumb {
 }
 .main .history {
   background-color: #171718;
-  float: left;
   display: flow-root;
   width: 100%;
 }
@@ -261,6 +261,7 @@ body ::-webkit-scrollbar-thumb {
 }
 .main .history .history-card-area .history-card p {
   width: 250px;
+  font-size: 0.8rem;
 }
 .main .history .history-card-area .history-card p:first-child {
   color: #fafafa;

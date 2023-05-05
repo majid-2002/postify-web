@@ -28,6 +28,8 @@ function ResponseArea({ responseData, Loading }) {
           readOnly={true}
           placeholder={"Your response goes here."}
           theme={dracula}
+          auto
+          
           height="32vh"
           extensions={
             contentType === "json"
@@ -57,7 +59,6 @@ function ResponseArea({ responseData, Loading }) {
           }
           readOnly={true}
           placeholder={"Your response goes here."}
-          height="32vh"
         />
       </Row>
     );
@@ -85,7 +86,7 @@ function ResponseArea({ responseData, Loading }) {
   return (
     <div>
       {data === "" ? (
-        <div className="response-area text-secondary d-flex justify-content-center align-items-center fs-6 fw-bold">
+        <div className="response-area text-secondary d-flex justify-content-center fs-6 fw-bold pt-5">
           <p className="me-3">Send a request</p>
           <p>
             <FeatherIcon icon="send" size="2.3em" className="request-icons" />
@@ -109,9 +110,9 @@ function ResponseArea({ responseData, Loading }) {
             <>
               <Row className="result-container pt-2 w-25">
                 {labels.map(({ value, style }, index) => (
-                  <Col md={4} key={index}>
+                  <Col md={4} key={index} >
                     <h4 style={style}>{value}</h4>
-                    <p style={style}>
+                    <p  style={style}>
                       {index === 0
                         ? status
                         : index === 1

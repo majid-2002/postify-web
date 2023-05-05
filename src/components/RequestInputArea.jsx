@@ -107,7 +107,7 @@ function Parameters({ endpoint, setEndpoint, parameter, setParameter }) {
   };
 
   return (
-    <div className="px-4 parameter-area">
+    <div className="px-3 parameter-area">
       <p>Query Parameters</p>
       {parameter.map((param, index) => (
         <Row className="g-2 my-1" key={index}>
@@ -136,7 +136,7 @@ function Parameters({ endpoint, setEndpoint, parameter, setParameter }) {
           <Col md={1}>
             <FeatherIcon
               icon="delete"
-              size="2.3em"
+              size="2rem"
               className="request-icons"
               onClick={() => handleRemoveClick(index)}
             />
@@ -225,7 +225,7 @@ function Body({ setEndpoint, endpoint }) {
   };
 
   return (
-    <div className="px-4 body-area">
+    <div className="px-3 body-area">
       <Row className="">
         <Col md={1} className="w-auto">
           <p>Content Type</p>
@@ -302,7 +302,7 @@ function Headers({ endpoint, setEndpoint, setHeader, header }) {
   };
 
   return (
-    <div className="px-4 parameter-area">
+    <div className="px-3 parameter-area">
       <p>Header List</p>
       {header.map((head, index) => (
         <Row className="g-2 my-1" key={index}>

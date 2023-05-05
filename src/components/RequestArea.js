@@ -26,7 +26,7 @@ function RequestArea({ endpoint, setEndpoint, handleSubmit }) {
   return (
     <div className="request-area">
       <Form onSubmit={handleFormSubmit}>
-        <div className="d-flex justify-content-center px-4">
+        <div className="d-flex justify-content-center px-3">
           <Dropdown>
             <Dropdown.Toggle className="rounded-0 btn-dropdown-request">
               {endpoint.method}

@@ -36,18 +36,19 @@ body {
   display:  flex;
 
   .left-area{
-    min-width: 250px;
+    min-width: 300px;
   }
   .right-area{
     width: 100%;
+    background-color: #353739;
+    overflow: hidden;
   }
 
 
   .header-area {
-    height: 150px;
+    height: 100px;
     width: 100%;
     background-color: #171718;
-    float: left;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -59,17 +60,15 @@ body {
   }
 
   .request-area {
-    height: 15%;
     width: 100%;
+    height: 100px;
     background-color: #212224;
-    float: right;
-    padding: 3.5em 0;
+    padding: 1.5rem 0;
 
     .btn-dropdown-request {
       background-color: #17a2b8;
       width: 80px;
       font-weight: 500;
-      font-size: 1rem;
       border-color: #17a2b8;
       cursor: pointer;
       &:hover {
@@ -93,9 +92,8 @@ body {
     color: #fafafa;
     user-select: none;
     width: 100%;
-    height: 35%;
-    float: right;
     background-color: #212224;
+    height: 250px;
     overflow-y: scroll;
 
     .cm-scroller::-webkit-scrollbar {
@@ -121,21 +119,24 @@ body {
         font-size: 1rem;
         color: #fafafa7b;
         display: inline;
-        margin-inline: 1.4em;
+        font-size: 0.9rem;
+        margin-inline: 1.2em;
         cursor: pointer;
 
         &:hover {
           color: #fafafa;
           transition: 0.2s;
         }
+        
       }
+      
     }
 
     .parameter-area,
     .body-area {
       p {
         color: #fafafa5a;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         font-weight: 500;
       }
       .btn-dropdown-request-input {
@@ -144,6 +145,7 @@ body {
         padding: 0;
         border: none;
         font-weight: 500;
+        font-size: 0.8rem;
         &:hover {
           color: #fafafa;
         }
@@ -157,6 +159,7 @@ body {
       .dropdown-menu {
         border: 1px solid #30363d;
         background-color: #212224;
+        font-size: 0.8rem;
       }
 
       .request-icons {
@@ -174,22 +177,22 @@ body {
   //? RESPONSE
   .response-area {
     width: 100%;
-    height: 50vh;
     background-color: #353739;
-    float: right;
     border-top: 1px silver inset;
-
+    height: 100%;
+    overflow: auto;
 
     p{
       color: #17a2b8;
     }
+
 
     ul {
       padding: 0;
       li {
         font-weight: 500;
         list-style: none;
-        font-size: 1rem;
+        font-size: 0.8rem;
         color: #fafafa7b;
         display: inline;
         margin-inline: 0.7em;
@@ -232,7 +235,7 @@ body {
 
     .result-container {
       h4 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         text-align: center;
       }
       p {
@@ -248,7 +251,6 @@ body {
   //? HISTORY
   .history {
     background-color: #171718;
-    float: left;
     display: flow-root;
     width: 100%;
 
@@ -309,6 +311,7 @@ body {
 
         p{
           width: 250px;
+          font-size: 0.8rem;
         }
 
         p:first-child {
