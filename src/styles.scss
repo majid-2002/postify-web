@@ -40,12 +40,13 @@ body {
   }
   .right-area {
     width: 100%;
+    height: 100vh;
     background-color: #353739;
     overflow: auto;
   }
 
   .header-area {
-    height: 100px;
+    height: 15vh;
     width: 100%;
     background-color: #171718;
     display: flex;
@@ -60,7 +61,7 @@ body {
 
   .request-area {
     width: 100%;
-    height: 100px;
+    height: 15vh;
     background-color: #212224;
     padding: 1.5rem 0;
 
@@ -92,7 +93,7 @@ body {
     user-select: none;
     width: 100%;
     background-color: #212224;
-    height: 250px;
+    height: 36vh;
     overflow-y: scroll;
 
     .cm-scroller::-webkit-scrollbar {
@@ -176,7 +177,7 @@ body {
     width: 100%;
     background-color: #353739;
     border-top: 1px silver inset;
-    height: 100%;
+    height: 49vh;
     overflow: auto;
 
     p {

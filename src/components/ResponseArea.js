@@ -28,8 +28,6 @@ function ResponseArea({ responseData, Loading }) {
           readOnly={true}
           placeholder={"Your response goes here."}
           theme={dracula}
-          auto
-          
           height="32vh"
           extensions={
             contentType === "json"
