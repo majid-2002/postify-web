@@ -19,4 +19,4 @@ Enter the URL of the API endpoint you want to test.
 Select the HTTP request method (GET, POST, PUT, DELETE).
 Add any custom headers or request body.
 Click "Send" to send the request and view the response.
-You can also save previous requests and load them later by clicking the "Save" and "Load" buttons.
+You can also save previous requests and load them later by clicking on old requests from the history section.
