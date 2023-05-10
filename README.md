@@ -20,3 +20,6 @@ Select the HTTP request method (GET, POST, PUT, DELETE).
 Add any custom headers or request body.
 Click "Send" to send the request and view the response.
 You can also save previous requests and load them later by clicking on old requests from the history section.
+
+## License
+Postify is licensed under the [MIT License](https://opensource.org/licenses/MIT) - see the [`LICENSE`](LICENSE) file for details.
