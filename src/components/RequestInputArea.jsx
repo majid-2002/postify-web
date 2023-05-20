@@ -107,7 +107,7 @@ function Parameters({ endpoint, setEndpoint, parameter, setParameter }) {
   };
 
   return (
-    <div className="px-3 parameter-area">
+    <div className="px-3 parameter-area" data-testid="parameters-component">
       <p>Query Parameters</p>
       {parameter.map((param, index) => (
         <Row className="g-2 my-1" key={index}>
@@ -225,7 +225,7 @@ function Body({ setEndpoint, endpoint }) {
   };
 
   return (
-    <div className="px-3 body-area">
+    <div className="px-3 body-area" data-testid="body-component">
       <Row className="">
         <Col md={1} className="w-auto">
           <p>Content Type</p>
@@ -302,7 +302,7 @@ function Headers({ endpoint, setEndpoint, setHeader, header }) {
   };
 
   return (
-    <div className="px-3 parameter-area">
+    <div className="px-3 parameter-area" data-testid="headers-component">
       <p>Header List</p>
       {header.map((head, index) => (
         <Row className="g-2 my-1" key={index}>
